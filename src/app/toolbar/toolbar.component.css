@@ -1,0 +1,12 @@
+.navbar {
+    background-color: #f13c20;
+    height: 60px !important;
+    z-index: 100;
+    position: sticky;
+    top: 0;
+    /*left: 0; */
+}
+
+.navbar-brand {
+    color: white !important;
+}
