@@ -28,7 +28,7 @@ export class MoviesService {
     var rows:string[] = csv.split('\n')
     rows.splice(0,1);
 
-    this.existentMovies = rows.map(val => {
+    this.existentMovies = rows.map((val,i) => {
       var properties = val.split(',');
       return {title: properties[0],
         year: properties[1],
