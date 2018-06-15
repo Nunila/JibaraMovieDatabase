@@ -15,6 +15,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { HomeComponent } from './home/home.component';
+import { MoviePreviewComponent } from './movie-preview/movie-preview.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import {MatIconModule} from '@angular/material/icon';
     AppComponent,
     SearchMoviesComponent,
     EditMoviesComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    HomeComponent,
+    MoviePreviewComponent
    
   ],
   imports: [
