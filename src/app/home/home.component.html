@@ -2,9 +2,8 @@
   <div *ngIf=moviesService.loadedListCompleted id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" >
           <div class="carousel-item active" >
-            <img routerLink="/movie_preview/:1000" (click)="setSelectedMovie('1000');" class="d-block w-100" src="../../assets/movie-posters/get out hor.jpg">
+            <img routerLink="/movie_preview/:1008" (click)="setSelectedMovie('1008');" class="d-block w-100" src="../../assets/movie-posters/shutter island hor.jpg">
             <div class="carousel-caption d-none d-md-block">
-              <h5>Get Out</h5>
             </div>
           </div>
           <div class="carousel-item wo" *ngFor="let top of getTop5Movies()">
@@ -23,8 +22,6 @@
           <span class="sr-only">Next</span>
         </a>       
   </div>
-
-  <button class="btn btn-warning" (click)=test()>wo</button>
 <br>
 
   <div>

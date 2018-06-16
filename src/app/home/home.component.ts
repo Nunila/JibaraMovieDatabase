@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   private top5Movies: Array<Movie> = new Array(5);
 
-  private initialized = false;
+  private initialized = 0;
   constructor(private moviesService: MoviesService) { }
 
   ngOnInit() {
@@ -23,22 +23,19 @@ export class HomeComponent implements OnInit {
   }
 
   getTop5Movies() {
-
-    if (!this.initialized) {
+    if (this.initialized ==0) {
       this.top5Movies = this.moviesService.getTop5Movies();
-      this.initialized = true;
+      this.initialized = 1
       return this.top5Movies;
+    }
+    if (this.initialized == 1){
+      this.initialized = 2;
+      var images = document.getElementsByClassName('wo');
+      for(var i=0;i<images.length;i++){
+        images[i].firstElementChild.setAttribute('src', "../../assets/movie-posters/" + this.top5Movies[i].images[1]);
+      }
     }
     return this.top5Movies
   }
 
-  test(){
-    console.log(this.top5Movies)
-    var images = document.getElementsByClassName('wo');
-    console.log(images);
-      for(var i=0;i<images.length;i++){
-        console.log(this.top5Movies[i].images[1])
-        images[i].firstElementChild.setAttribute('src', "../../assets/movie-posters/" + this.top5Movies[i].images[1]);
-      }
-  }
 }

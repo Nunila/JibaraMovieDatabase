@@ -85,13 +85,13 @@ export class MoviesService {
 
   getTop5Movies(){
     if (this.existentMovies) {
-      var top1 = this.getMovieById('1008'), //Shutter Island
+      var top1 = this.getMovieById('1000'), //Get out
     top2 = this.getMovieById('1029'), //The one i live
     top3 = this.getMovieById('1050'), //django
-    //top4 =this.getMovieById('1009'), //Balck Swan
-    top5 =this.getMovieById('1006'); //Gone Girl
+    top4 =this.getMovieById('1009') //Balck Swan
+    //top5 =this.getMovieById('1006'); //Gone Girl
 
-    this.top5 = [top1, top2, top3,  top5];
+    this.top5 = [top1, top2, top3,  top4];
     return this.top5;
     }
     else return;
