@@ -1,0 +1,33 @@
+
+.grid-container {
+    margin: 5px;
+    margin-top: -40px;   
+    display: grid; 
+    grid-template-columns: 30% 30% 40%;
+    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-areas: 
+        "poster staff media"
+        "poster reviews media"
+        "poster reviews media"
+        "basic-info reviews media"
+}
+
+.movie-poster {
+    grid-area: poster;
+}
+.basic-info {
+    grid-area: basic-info;
+}
+.staff {
+    grid-area: staff;
+}
+.reviews{
+    grid-area: reviews;
+}
+.movie-media {
+    grid-area: media
+}
+
+img {
+    max-height: 450px;
+}

@@ -17,6 +17,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { HomeComponent } from './home/home.component';
 import { MoviePreviewComponent } from './movie-preview/movie-preview.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MoviePreviewComponent } from './movie-preview/movie-preview.component';
     NoopAnimationsModule,
     
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    AppRoutingModule
   ],
   providers: [MoviesService],
   bootstrap: [AppComponent]

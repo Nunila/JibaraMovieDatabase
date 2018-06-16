@@ -1,5 +1,6 @@
 
 export interface Movie {
+    id: string,
     title: string,
     year: string,
     genres: string,
@@ -9,5 +10,6 @@ export interface Movie {
     rating: string,
     nuniReview: string,
     funFact: string,
-    Seen: string
+    Seen: string,
+    //images: string[]
 }

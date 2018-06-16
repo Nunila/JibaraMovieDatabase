@@ -1,16 +1,23 @@
 .carousel-item {
-    max-height: 400px;
+    max-height: 450px;
 }
 
 .home-container {
     margin-top: -40px;
     color: white;
-    background: linear-gradient(to right, #4056a1, white);
-    /*background-color: darkgray;*/
+    /* background: linear-gradient(to bottom right, black, darkgray); */
+    background-color:#585858;
 }
 
 .carousel-item img {
-    max-height:400px
+    max-height:450px
 }
 
+.card {
+    margin: 5px;    
+}
+
+img {
+    cursor: pointer;
+}
 
