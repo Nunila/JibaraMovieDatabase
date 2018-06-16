@@ -38,18 +38,24 @@ export class MoviesService {
 
     this.existentMovies = rows.map((val,i) => {
       var properties = val.split(',');
+      var genres;
+      if (properties[3])  genres = properties[3].split(' ');
+      else genres = properties[3];
       return {
         id: properties[0].toString(),
         title: properties[1],
         year: properties[2],
-        genres: properties[3],
-        originalLanguage: properties[4],
-        director: properties[5],
-        mainCast: properties[6],
-        rating: properties[7],
-        nuniReview: properties[8],
-        funFact: properties[9],
-        Seen: properties[10]
+        genres: genres,
+        plot: properties[4],
+        originalLanguage: properties[5],
+        director: properties[6],
+        writer: properties[7],
+        mainCast: properties[8],
+        rating: properties[9],
+        nuniReview: properties[10],
+        funFact: properties[11],
+        seen: properties[12],
+        posterFileName: properties[13]
       }       
     });
   }
@@ -87,8 +93,8 @@ export class MoviesService {
     var top1 = this.getMovieById('1008'), //Shutter Island
     top2 = this.getMovieById('1029'), //The one i live
     top3 = this.getMovieById('1050'), //django
-    top4 =this.getMovieById('1009'),
-    top5 =this.getMovieById('1010');
+    top4 =this.getMovieById('1009'), //Balck Swan
+    top5 =this.getMovieById('1006'); //Gone Girl
 
     this.top5 = [top1, top2, top3, top4, top5];
     return this.top5;

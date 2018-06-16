@@ -3,17 +3,32 @@
     margin: 5px;
     margin-top: -40px;   
     display: grid; 
-    grid-template-columns: 30% 30% 40%;
-    grid-template-rows: 25% 25% 25% 25%;
+    background-color: #e9ecef;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-rows: 10% 20% 20% 25% 25%;
     grid-template-areas: 
+        "title title title"
         "poster staff media"
         "poster reviews media"
         "poster reviews media"
         "basic-info reviews media"
 }
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
 
+.jumbotron{
+    margin-top: -40px;
+}
+.title {
+    grid-area: title;
+    text-align: center;
+    font-weight: 400;
+}
 .movie-poster {
     grid-area: poster;
+    text-align: center;
 }
 .basic-info {
     grid-area: basic-info;
@@ -25,7 +40,8 @@
     grid-area: reviews;
 }
 .movie-media {
-    grid-area: media
+    grid-area: media;
+    text-align: center;
 }
 
 img {

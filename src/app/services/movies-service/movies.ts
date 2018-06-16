@@ -3,13 +3,16 @@ export interface Movie {
     id: string,
     title: string,
     year: string,
-    genres: string,
+    genres: string[],
+    plot: string,
     originalLanguage: string,
     director: string,
+    writer: string,
     mainCast: string,
     rating: string,
     nuniReview: string,
     funFact: string,
-    Seen: string,
+    seen: string,
+    posterFileName: string,
     //images: string[]
 }
