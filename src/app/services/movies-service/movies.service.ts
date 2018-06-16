@@ -38,9 +38,11 @@ export class MoviesService {
 
     this.existentMovies = rows.map((val,i) => {
       var properties = val.split(',');
-      var genres;
+      var genres, files;
       if (properties[3])  genres = properties[3].split(' ');
       else genres = properties[3];
+      if (properties[13]) files = properties[13].split('/'); 
+      else files = properties[13];
       return {
         id: properties[0].toString(),
         title: properties[1],
@@ -55,7 +57,7 @@ export class MoviesService {
         nuniReview: properties[10],
         funFact: properties[11],
         seen: properties[12],
-        posterFileName: properties[13]
+        images: files
       }       
     });
   }
@@ -76,28 +78,24 @@ export class MoviesService {
   }
 
   getDeterminedPicture(movId: string, allignment:string){
-    var src = "../../assets/movie-posters/"
-    var movie = this.getMovieById(movId);
-    var usefulName = movie.title.toLowerCase()
-    console.log(usefulName);
-
-    src += usefulName + ".jpg"
-
-    return src;
 
   }
 
   //---------------Custom lists---------------------//
 
   getTop5Movies(){
-    var top1 = this.getMovieById('1008'), //Shutter Island
+    if (this.existentMovies) {
+      var top1 = this.getMovieById('1008'), //Shutter Island
     top2 = this.getMovieById('1029'), //The one i live
     top3 = this.getMovieById('1050'), //django
-    top4 =this.getMovieById('1009'), //Balck Swan
+    //top4 =this.getMovieById('1009'), //Balck Swan
     top5 =this.getMovieById('1006'); //Gone Girl
 
-    this.top5 = [top1, top2, top3, top4, top5];
+    this.top5 = [top1, top2, top3,  top5];
     return this.top5;
+    }
+    else return;
+    
   }
 
 }

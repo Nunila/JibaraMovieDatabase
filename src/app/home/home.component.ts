@@ -9,7 +9,9 @@ import {Movie} from '../services/movies-service/movies'
 })
 export class HomeComponent implements OnInit {
 
-  private top5Movies = new Array();
+  private top5Movies: Array<Movie> = new Array(5);
+
+  private initialized = false;
   constructor(private moviesService: MoviesService) { }
 
   ngOnInit() {
@@ -21,21 +23,22 @@ export class HomeComponent implements OnInit {
   }
 
   getTop5Movies() {
-    if (this.moviesService.getTop5Movies()[0] == undefined){
-      return null;
+
+    if (!this.initialized) {
+      this.top5Movies = this.moviesService.getTop5Movies();
+      this.initialized = true;
+      return this.top5Movies;
     }
-    else {
-      if(this.top5Movies.length > 1) return this.top5Movies
-      else {
-        this.top5Movies = this.moviesService.getTop5Movies()
-        return this.top5Movies
-      }      
-    }
+    return this.top5Movies
   }
 
-  ss(a,b){
-    this.moviesService.getDeterminedPicture(a,b)
+  test(){
+    console.log(this.top5Movies)
+    var images = document.getElementsByClassName('wo');
+    console.log(images);
+      for(var i=0;i<images.length;i++){
+        console.log(this.top5Movies[i].images[1])
+        images[i].firstElementChild.setAttribute('src', "../../assets/movie-posters/" + this.top5Movies[i].images[1]);
+      }
   }
-
-
 }

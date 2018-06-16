@@ -18,8 +18,7 @@ export class MoviePreviewComponent implements OnInit {
     this.selectedMovie = this.moviesService.selectedMovie;
 
     var each = this.selectedMovie.mainCast.split(' ');
-    var limit = each.length/2;
-    for(var i=0;i<=limit;i+=2){
+    for(var i=0;i< each.length;i+=2){
       this.cast.push(each[i]+ " " + each[i+1]);
     }
     console.log(this.selectedMovie)

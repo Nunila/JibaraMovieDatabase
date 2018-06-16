@@ -13,6 +13,5 @@ export interface Movie {
     nuniReview: string,
     funFact: string,
     seen: string,
-    posterFileName: string,
-    //images: string[]
+    images: string[]
 }

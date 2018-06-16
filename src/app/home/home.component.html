@@ -1,19 +1,14 @@
 <div class="home-container"> 
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <!-- <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol> -->
+  <div *ngIf=moviesService.loadedListCompleted id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" >
           <div class="carousel-item active" >
-            <img routerLink="/movie_preview/:1000" (click)="setSelectedMovie('1000');" class="d-block w-100" src="../../assets/movie-posters/shutter island art.jpg">
+            <img routerLink="/movie_preview/:1000" (click)="setSelectedMovie('1000');" class="d-block w-100" src="../../assets/movie-posters/get out hor.jpg">
             <div class="carousel-caption d-none d-md-block">
               <h5>Get Out</h5>
             </div>
           </div>
-          <div class="carousel-item" *ngFor="let top of getTop5Movies()">
-              <img routerLink="/movie_preview/:{{top.id}}" (click)="setSelectedMovie(top.id);" class="d-block w-100" src="../../assets/movie-posters/shutter island art.jpg" alt="{{top.title}}">
+          <div class="carousel-item wo" *ngFor="let top of getTop5Movies()">
+              <img routerLink="/movie_preview/:{{top.id}}" (click)="setSelectedMovie(top.id);" class="d-block w-100"  alt="{{top.title}}">
               <div class="carousel-caption d-none d-md-block">
                 <h5>{{top.title}}</h5>
               </div>
@@ -26,10 +21,10 @@
         <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
-        </a>
-        
+        </a>       
   </div>
 
+  <button class="btn btn-warning" (click)=test()>wo</button>
 <br>
 
   <div>
