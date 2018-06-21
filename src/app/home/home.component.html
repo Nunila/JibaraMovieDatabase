@@ -6,7 +6,7 @@
             <div class="carousel-caption d-none d-md-block">
             </div>
           </div>
-          <div class="carousel-item wo" *ngFor="let top of getTop5Movies()">
+          <div class="carousel-item top-mov" *ngFor="let top of getTop5Movies()">
               <img routerLink="/movie_preview/:{{top.id}}" (click)="setSelectedMovie(top.id);" class="d-block w-100"  alt="{{top.title}}">
               <div class="carousel-caption d-none d-md-block">
                 <h5>{{top.title}}</h5>
@@ -24,127 +24,100 @@
   </div>
 <br>
 
-  <div>
-    <h6>Thriller</h6>
-    <div class="card-group">
-      <div class="card text-white">
-        <img routerLink="/movie_preview" class="card-img" src="https://i.gifer.com/e7u.gif" alt="Card image cap">
-        <div class="card-img-overlay">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Last updated 3 mins ago</p>
-        </div>
-      </div>
-      <div class="card text-white">
-        <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-        <div class="card-img-overlay">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Last updated 3 mins ago</p>
-        </div>
-      </div>
-      <div class="card text-white">
-        <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-        <div class="card-img-overlay">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Last updated 3 mins ago</p>
-        </div>
-      </div>
-      <div class="card  text-white">
-        <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-        <div class="card-img-overlay">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Last updated 3 mins ago</p>
-        </div>
-      </div>
-      <div class="card text-white">
-        <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-        <div class="card-img-overlay">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Last updated 3 mins ago</p>
-        </div>
-      </div>
 
-    </div>
+  <div *ngIf=moviesService.loadedListCompleted class="grid" >
+
+    <figure *ngFor="let movie of getAllMovWithImg()" class="effect-sadie all-movs">
+      <img alt="{{movie.title}}"/>
+      <figcaption>
+        <!-- <h2><span>{{movie.title}}</span></h2> -->
+        <p>{{movie.plot}}</p>
+        <a href="#">View more</a>
+      </figcaption>			
+    </figure>
+    <!-- <figure class="effect-sadie">
+      <img src="../../assets/movie-posters/black swan ver.jpg" alt="img01"/>
+      <figcaption>
+        <h2>Nice <span>Lily</span></h2>
+        <p>Lily likes to play with crayons and pencils</p>
+        <a href="#">View more</a>
+      </figcaption>			
+    </figure>
+    <figure class="effect-sadie">
+      <img src="../../assets/movie-posters/get out ver.jpg" alt="img01"/>
+      <figcaption>
+        <h2>Nice <span>Lily</span></h2>
+        <p>Lily likes to play with crayons and pencils</p>
+        <a href="#">View more</a>
+      </figcaption>			
+    </figure>
+    <figure class="effect-sadie">
+      <img src="../../assets/movie-posters/her ver.jpg" alt="img01"/>
+      <figcaption>
+        <h2>Nice <span>Lily</span></h2>
+        <p>Lily likes to play with crayons and pencils</p>
+        <a href="#">View more</a>
+      </figcaption>			
+    </figure>
+    <figure class="effect-sadie">
+        <img src="../../assets/movie-posters/django ver.png" alt="img01"/>
+        <figcaption>
+          <h2>Nice <span>Lily</span></h2>
+          <p>Lily likes to play with crayons and pencils</p>
+          <a href="#">View more</a>
+        </figcaption>			
+      </figure>
+    <figure class="effect-sadie">
+      <img src="../../assets/movie-posters/gone girl ver.jpg" alt="img01"/>
+      <figcaption>
+        <h2>Nice <span>Lily</span></h2>
+        <p>Lily likes to play with crayons and pencils</p>
+        <a href="#">View more</a>
+      </figcaption>			
+    </figure> -->
+    
   </div>
-  <div>
+
+  <!-- <div>
     <h6>Horror</h6>
     <div class="card-group">
-      <div class="card text-white">
+      <div class="card text-white small-prev">
         <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-        <div class="card-img-overlay">
+        <div class="preview-text">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">Last updated 3 mins ago</p>
         </div>
       </div>
-      <div class="card text-white">
+      <div class="card text-white small-prev">
         <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-        <div class="card-img-overlay">
+        <div class="preview-text">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">Last updated 3 mins ago</p>
         </div>
       </div>
-      <div class="card text-white">
+      <div class="card text-white small-prev">
         <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-        <div class="card-img-overlay">
+        <div class="preview-text">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">Last updated 3 mins ago</p>
         </div>
       </div>
-      <div class="card  text-white">
+      <div class="card  text-white small-prev">
         <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-        <div class="card-img-overlay">
+        <div class="preview-text">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">Last updated 3 mins ago</p>
         </div>
       </div>
-      <div class="card text-white">
+      <div class="card text-white small-prev">
         <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-        <div class="card-img-overlay">
+        <div class="preview-text">
           <h5 class="card-title">Card title</h5>
           <p class="card-text">Last updated 3 mins ago</p>
         </div>
       </div>
+    </div>
+  </div> -->
 
-    </div>
-    <div>
-      <h6>Comedy</h6>
-      <div class="card-group">
-        <div class="card text-white">
-          <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-          <div class="card-img-overlay">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Last updated 3 mins ago</p>
-          </div>
-        </div>
-        <div class="card text-white">
-          <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-          <div class="card-img-overlay">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Last updated 3 mins ago</p>
-          </div>
-        </div>
-        <div class="card text-white">
-          <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-          <div class="card-img-overlay">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Last updated 3 mins ago</p>
-          </div>
-        </div>
-        <div class="card  text-white">
-          <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-          <div class="card-img-overlay">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Last updated 3 mins ago</p>
-          </div>
-        </div>
-        <div class="card text-white">
-          <img class="card-img" src="https://personifycorp.com/wp-content/uploads/2016/07/enterprise-level.jpg" alt="Card image cap">
-          <div class="card-img-overlay">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Last updated 3 mins ago</p>
-          </div>
-        </div>
-  
-      </div>
-    </div>
+
   </div>
-</div> 

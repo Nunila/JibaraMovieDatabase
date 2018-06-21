@@ -8,6 +8,7 @@ import {Movie} from './movies'
 export class MoviesService {
 
   private existentMovies: Array<Movie> = new Array();
+  private allMoviesWithImg: Array<Movie> = new Array();
   
   public selectedMovie: Movie;
   private top5: Array<Movie> = new Array();
@@ -60,18 +61,20 @@ export class MoviesService {
         images: files
       }       
     });
+
+    this.fillMovWithImgArr();
   }
 
-  getAllMovies(){
-    return this.existentMovies
-  }
-
-  getMovieById(lookupId){    
-    var r =  this.existentMovies.find(function(movie){
-      return movie.id == lookupId;
+  fillMovWithImgArr(){
+    this.existentMovies.forEach(movie => {
+      if (movie.images[0]) {
+        if (movie.images[0].length >1)
+        this.allMoviesWithImg.push(movie);
+      }
     });
-    return r;
   }
+
+  
 
   setSelectedMovie(newId:string){
     this.selectedMovie = this.getMovieById(newId);
@@ -83,10 +86,21 @@ export class MoviesService {
 
   //---------------Custom lists---------------------//
 
+  getAllMovies(){
+    return this.existentMovies
+  }
+
+  getMovieById(lookupId){    
+    var r =  this.existentMovies.find(function(movie){
+      return movie.id == lookupId;
+    });
+    return r;
+  }
+  
   getTop5Movies(){
     if (this.existentMovies) {
       var top1 = this.getMovieById('1000'), //Get out
-    top2 = this.getMovieById('1029'), //The one i live
+    top2 = this.getMovieById('1029'), //The one i love
     top3 = this.getMovieById('1050'), //django
     top4 =this.getMovieById('1009') //Balck Swan
     //top5 =this.getMovieById('1006'); //Gone Girl
@@ -94,8 +108,12 @@ export class MoviesService {
     this.top5 = [top1, top2, top3,  top4];
     return this.top5;
     }
-    else return;
-    
+    else return;  
   }
+
+  getAllMoviesWithImg() {
+    return this.allMoviesWithImg
+  }
+
 
 }
