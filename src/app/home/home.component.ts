@@ -18,12 +18,14 @@ export class HomeComponent implements OnInit {
   constructor(private moviesService: MoviesService) { }
 
   ngOnInit() {
-    this.moviesService.httpGetAllMovies();
+    if (!this.moviesService.arraysFilled)    this.moviesService.httpGetAllMovies();
   }
 
   setSelectedMovie(ss:string){
     this.moviesService.setSelectedMovie(ss);
   }
+
+
 
   getAllMovWithImg(){
     if (this.initializedAll ==0) {
@@ -38,7 +40,7 @@ export class HomeComponent implements OnInit {
         images[i].firstElementChild.setAttribute('src', "../../assets/movie-posters/" + this.allMovsPics[i].images[0]);
       }
     }
-    return this.allMovsPics
+    return this.moviesService.shuffle(this.allMovsPics);
   }
   
 

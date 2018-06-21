@@ -28,7 +28,9 @@
 }
 .movie-poster {
     grid-area: poster;
-    text-align: center;
+    text-align: center !important;
+    width:95%;
+    height: 100%;
 }
 .basic-info {
     grid-area: basic-info;

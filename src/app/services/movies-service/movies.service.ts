@@ -14,8 +14,21 @@ export class MoviesService {
   private top5: Array<Movie> = new Array();
 
   public loadedListCompleted = false;
+  public arraysFilled = false;
 
   constructor(private http: HttpClient) { }
+
+  shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex; 
+    while (0 !== currentIndex) { 
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1; 
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }  
+    return array;
+  }
 
   httpGetAllMovies(){
     this.http.get('assets/MovieDBcsv.csv', {responseType: 'text'})
@@ -28,6 +41,7 @@ export class MoviesService {
         },
       () => {
         this.loadedListCompleted = true;
+        this.arraysFilled = true;
       }
     )
   }
