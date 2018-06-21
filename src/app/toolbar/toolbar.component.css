@@ -9,4 +9,6 @@
 
 .navbar-brand {
     color: white !important;
+    cursor: pointer; 
+    font-family: 'Pacifico',cursive;
 }

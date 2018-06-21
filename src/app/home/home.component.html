@@ -1,31 +1,28 @@
 <div class="home-container"> 
-  <div *ngIf=moviesService.loadedListCompleted id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner" >
+  <!-- <div *ngIf=moviesService.loadedListCompleted id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner effect-zoe" >
           <div class="carousel-item active" >
             <img routerLink="/movie_preview/:1008" (click)="setSelectedMovie('1008');" class="d-block w-100" src="../../assets/movie-posters/shutter island hor.jpg">
             <div class="carousel-caption d-none d-md-block">
             </div>
           </div>
-          <div class="carousel-item top-mov" *ngFor="let top of getTop5Movies()">
+          <!-- <div class="carousel-item top-mov" *ngFor="let top of getTop5Movies()">
               <img routerLink="/movie_preview/:{{top.id}}" (click)="setSelectedMovie(top.id);" class="d-block w-100"  alt="{{top.title}}">
               <div class="carousel-caption d-none d-md-block">
                 <h5>{{top.title}}</h5>
               </div>
             </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>       
+        </div>     
+  </div> -->
+  <div class="big-cont">
+    <img src="../../assets/movie-posters/shutter island hor.jpg" alt="Avatar" class="image" style="width:100%">
   </div>
-<br>
+  
+  
+    <br>
 
 
-  <div *ngIf=moviesService.loadedListCompleted class="grid" >
+  <div *ngIf=moviesService.loadedListCompleted class="grid all-cont" >
 
     <figure *ngFor="let movie of getAllMovWithImg()" class="effect-sadie all-movs">
       <img alt="{{movie.title}}"/>
