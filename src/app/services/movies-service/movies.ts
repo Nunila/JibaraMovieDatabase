@@ -4,6 +4,7 @@ export interface Movie {
     title: string,
     year: string,
     genres: string[],
+    runtime: string,
     plot: string,
     originalLanguage: string,
     director: string,
@@ -13,5 +14,10 @@ export interface Movie {
     nuniReview: string,
     funFact: string,
     seen: string,
-    images: string[]
+    images: string[],
+}
+
+export interface MovieOption {
+    value: string;
+    text: string;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
-import {Movie} from './movies'
+import {Movie, MovieOption} from './movies'
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,10 @@ export class MoviesService {
 
   private existentMovies: Array<Movie> = new Array();
   private allMoviesWithImg: Array<Movie> = new Array();
-  
-  public selectedMovie: Movie;
   private top5: Array<Movie> = new Array();
+
+  private movieOptions: Array<MovieOption> = new Array();
+  public selectedMovie: Movie;
 
   public loadedListCompleted = false;
   public arraysFilled = false;
@@ -56,39 +57,47 @@ export class MoviesService {
       var genres, files;
       if (properties[3])  genres = properties[3].split(' ');
       else genres = properties[3];
-      if (properties[13]) files = properties[13].split('/'); 
-      else files = properties[13];
+      if (properties[14]) files = properties[14].split('/'); 
+      else files = properties[14];
       return {
         id: properties[0].toString(),
         title: properties[1],
         year: properties[2],
         genres: genres,
-        plot: properties[4],
-        originalLanguage: properties[5],
-        director: properties[6],
-        writer: properties[7],
-        mainCast: properties[8],
-        rating: properties[9],
-        nuniReview: properties[10],
-        funFact: properties[11],
-        seen: properties[12],
+        runtime: properties[4],
+        plot: properties[5],
+        originalLanguage: properties[6],
+        director: properties[7],
+        writer: properties[8],
+        mainCast: properties[9],
+        rating: properties[10],
+        nuniReview: properties[11],
+        funFact: properties[12],
+        seen: properties[13],
         images: files
       }       
     });
 
-    this.fillMovWithImgArr();
+    this.existentMovies.pop();
+    console.log(this.existentMovies)
+    this.fillOtherMovieArr();
   }
 
-  fillMovWithImgArr(){
+  fillOtherMovieArr(){
     this.existentMovies.forEach(movie => {
+      //Movies with image
       if (movie.images[0]) {
         if (movie.images[0].length >1)
         this.allMoviesWithImg.push(movie);
+        console.log(this.allMoviesWithImg)
+
       }
+
+      //movie options
+      this.movieOptions.push({value: movie.id, text: movie.title});
+
     });
   }
-
-  
 
   setSelectedMovie(newId:string){
     this.selectedMovie = this.getMovieById(newId);
@@ -126,7 +135,11 @@ export class MoviesService {
   }
 
   getAllMoviesWithImg() {
-    return this.allMoviesWithImg
+    return this.allMoviesWithImg;
+  }
+
+  getMovieOptions(){
+    return this.movieOptions;
   }
 
 
