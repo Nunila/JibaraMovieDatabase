@@ -4,11 +4,30 @@
     z-index: 100;
     position: sticky;
     top: 0;
-    /*left: 0; */
+}
+
+.flex-container-row {
+    font-family: 'Pacifico',cursive;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-start {
+    justify-content: flex-start;
+}
+
+.flex-end {
+    justify-content: flex-end;
 }
 
 .navbar-brand {
     color: white !important;
     cursor: pointer; 
     font-family: 'Pacifico',cursive;
+}
+
+.nav-link {
+    cursor: pointer;
 }

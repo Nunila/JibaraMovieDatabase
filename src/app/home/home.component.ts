@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   constructor(private moviesService: MoviesService) { }
 
   ngOnInit() {
-    if (!this.moviesService.arraysFilled)    this.moviesService.httpGetAllMovies();
+    if (this.moviesService.getAllMovies().length < 1)    this.moviesService.httpGetAllMovies();
   }
 
   setSelectedMovie(ss:string){

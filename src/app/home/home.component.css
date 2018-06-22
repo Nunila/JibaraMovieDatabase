@@ -13,18 +13,22 @@
     max-height:390px
 }
 
-img {
+/* img {
     cursor: pointer;
+} */
+
+.big-cont img{
+	height:420px;
 }
 
+/*---------------------------------*/
+
+
+/*---------------------------------*/
 figcaption {
 	font-family: 'Krona One', sans-serif;
 }
 
-/*---------------------------------*/
-
-
-/*---------------------------------*/
 .all-cont {
     margin: 5px;
     margin-top: -20px;   

@@ -11,7 +11,6 @@ export class SearchMoviesComponent implements OnInit {
   constructor(private moviesService: MoviesService) { }
 
   ngOnInit() {
-    this.moviesService.httpGetAllMovies();
   }
 
   getAllMovies(){

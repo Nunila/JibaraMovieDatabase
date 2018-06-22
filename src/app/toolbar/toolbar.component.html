@@ -5,16 +5,18 @@
       <span class="navbar-toggler-icon"></span>
     </button>
    
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  
-      <form class="form-inline my-2 my-lg-0">
+    <div class="collapse navbar-collapse flex-container-row" id="navbarSupportedContent">     
+      <ul class="navbar-nav flex-start">
+        <li class="nav-item active">
+          <div class="nav-link" routerLink="/search_movies">Search</div>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" routerLink="/modify_DB">Modify DB</div>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0 flex-end">
         <input class="form-control mr-sm-2" type="search" placeholder="Quick search" aria-label="Search">
         <button type="button" class="btn btn-outline-light">Search</button>
       </form>
-  
-      <ul class="navbar-nav mr-auto">
-  
-      </ul>
-  
     </div>
 </nav>
