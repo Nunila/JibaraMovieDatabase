@@ -79,7 +79,6 @@ export class MoviesService {
     });
 
     this.existentMovies.pop();
-    console.log(this.existentMovies)
     this.fillOtherMovieArr();
   }
 
@@ -89,10 +88,7 @@ export class MoviesService {
       if (movie.images[0]) {
         if (movie.images[0].length >1)
         this.allMoviesWithImg.push(movie);
-        console.log(this.allMoviesWithImg)
-
       }
-
       //movie options
       this.movieOptions.push({value: movie.id, text: movie.title});
 
