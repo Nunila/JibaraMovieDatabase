@@ -155,7 +155,7 @@
           </div>
           <div class="form-group col-md-4">
             <label for="inputYear">Runtime (min)</label>
-            <input type="number" [(ngModel)]="selectedMovie.id" required name="runtime"class="form-control" id="inputYear" placeholder="Runtime">
+            <input type="number" [(ngModel)]="selectedMovie.runtime" required name="runtime"class="form-control" id="inputYear" placeholder="Runtime">
             <div class="invalid-feedback">
               Please provide a value.
             </div>
@@ -234,7 +234,7 @@
           <label class="form-check-label" for="gridCheck">Seen</label>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Submit PUT</button>
+      <button type="submit" class="btn btn-primary" (click)=submitPUT()>Submit PUT</button>
     </form>
   </div>
 

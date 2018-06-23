@@ -13,6 +13,24 @@ export class MoviesService {
 
   private movieOptions: Array<MovieOption> = new Array();
   public selectedMovie: Movie;
+  public movieToPostOrPut: Movie;
+  private modelPostPut = {
+    id: null,
+    title: null,
+    year:null ,
+    genres: null,
+    runtime: null,
+    plot: null,
+    originalLanguage: null,
+    director: null,
+    writer: null,
+    mainCast: null,
+    rating:null,
+    nuniReview: null,
+    funFact: null,
+    seen: null,
+    images: null,
+  }
 
   public loadedListCompleted = false;
   public arraysFilled = false;
@@ -31,6 +49,8 @@ export class MoviesService {
     return array;
   }
 
+  //---------------GET-------------------------------//
+
   httpGetAllMovies(){
     this.http.get('assets/MovieDBcsv.csv', {responseType: 'text'})
     .subscribe(
@@ -48,14 +68,13 @@ export class MoviesService {
   }
 
   parseCSVToObject(csv :string) {
-
     var rows:string[] = csv.split('\n')
     rows.splice(0,1);
 
     this.existentMovies = rows.map((val,i) => {
       var properties = val.split(',');
       var genres, files;
-      if (properties[3])  genres = properties[3].split(' ');
+      if (properties[3])  genres = properties[3].split(' ').join('/');
       else genres = properties[3];
       if (properties[14]) files = properties[14].split('/'); 
       else files = properties[14];
@@ -82,6 +101,40 @@ export class MoviesService {
     this.fillOtherMovieArr();
   }
 
+  //------------------- POST and PUT ----------------------------------//
+
+  httpPutMovie(){
+    var csvString = this.parseObjectToCSV(this.movieToPostOrPut);
+    this.http.post('assets/MovieDBcsv.csv', csvString, {responseType: 'text'})   
+    .subscribe(
+        res => {
+          console.log(res);
+        },
+        error => {
+          console.log(error);
+        },
+      () => {
+      }
+    )
+  }
+
+  parseObjectToCSV(movie: Movie) {    
+    
+    Object.entries(movie).forEach(entry => {
+      if (entry[0] == "images"){
+        this.modelPostPut.images = entry[1].join("/");
+      }
+      else {
+        this.modelPostPut[entry[0]] = entry[1];
+      }
+    })
+
+    var csv:string = Object.values(this.modelPostPut).join(",");
+    return csv;
+
+  }
+  
+  //---------------------------------------//
   fillOtherMovieArr(){
     this.existentMovies.forEach(movie => {
       //Movies with image
