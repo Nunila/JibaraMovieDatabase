@@ -1,24 +1,18 @@
 <div class="home-container"> 
-  <!-- <div *ngIf=moviesService.loadedListCompleted id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner effect-zoe" >
-          <div class="carousel-item active" >
-            <img routerLink="/movie_preview/:1008" (click)="setSelectedMovie('1008');" class="d-block w-100" src="../../assets/movie-posters/shutter island hor.jpg">
-            <div class="carousel-caption d-none d-md-block">
-            </div>
-          </div>
-          <!-- <div class="carousel-item top-mov" *ngFor="let top of getTop5Movies()">
-              <img routerLink="/movie_preview/:{{top.id}}" (click)="setSelectedMovie(top.id);" class="d-block w-100"  alt="{{top.title}}">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>{{top.title}}</h5>
-              </div>
-            </div>
-        </div>     
-  </div> -->
   <div class="big-cont">
     <img src="../../assets/movie-posters/shutter island hor.jpg" alt="shutterIsland" class="image" style="width:100%">
   </div>
   
   
+    <br>
+
+    <h1>Our MongoDB is Working!</h1>
+
+    <ul>
+      <li *ngFor="let user of users">{{ user.name }}</li>
+    </ul>
+
+
     <br>
 
 

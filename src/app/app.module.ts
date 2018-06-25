@@ -11,15 +11,19 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
-
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { DataService } from './services/data.service';
+
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { HomeComponent } from './home/home.component';
 import { MoviePreviewComponent } from './movie-preview/movie-preview.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { ModifyDBComponent } from './modify-db/modify-db.component';
+import * as fs from "fs";
 
+declare var require: any;
 
 @NgModule({
   declarations: [
@@ -34,6 +38,7 @@ import { ModifyDBComponent } from './modify-db/modify-db.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    HttpModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
     FormsModule,
@@ -42,7 +47,7 @@ import { ModifyDBComponent } from './modify-db/modify-db.component';
     MatIconModule,
     AppRoutingModule
   ],
-  providers: [MoviesService],
+  providers: [MoviesService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

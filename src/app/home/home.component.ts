@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MoviesService} from '../services/movies-service/movies.service'
 import {Movie} from '../services/movies-service/movies'
 
+import {DataService} from '../services/data.service'
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,16 +11,24 @@ import {Movie} from '../services/movies-service/movies'
 })
 export class HomeComponent implements OnInit {
 
+  users: Array<any>;
+
   private top5Movies: Array<Movie> = new Array(5);
   private allMovsPics: Array<Movie> = new Array();
 
   private initializedTop = 0;
   private initializedAll = 0;
 
-  constructor(private moviesService: MoviesService) { }
+  private groceryList = new Array;
+
+
+  constructor(private moviesService: MoviesService, private dataService:DataService) { }
 
   ngOnInit() {
     if (this.moviesService.getAllMovies().length < 1)    this.moviesService.httpGetAllMovies();
+
+    this.dataService.getUsers()
+        .subscribe(res => this.users = res);
   }
 
   setSelectedMovie(ss:string){

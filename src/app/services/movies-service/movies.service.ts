@@ -1,12 +1,23 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import {Movie, MovieOption} from './movies'
+import * as fs from "fs";
+
+// var MongoClient = require('mongodb').MongoClient;
+
+// var uri = "mongodb+srv://nunila:<Alemania18>@mymoviedatabase-xue51.mongodb.net/movies?retryWrites=true";
+// MongoClient.connect(uri, function(err, client) {
+//    const collection = client.db("movies").collection("devices");
+//    // perform actions on the collection object
+//    client.close();
+// });
 
 @Injectable({
   providedIn: 'root'
 })
-export class MoviesService {
 
+
+export class MoviesService {
   private existentMovies: Array<Movie> = new Array();
   private allMoviesWithImg: Array<Movie> = new Array();
   private top5: Array<Movie> = new Array();
@@ -37,6 +48,10 @@ export class MoviesService {
 
   constructor(private http: HttpClient) { }
 
+
+
+  //--------------------------//
+
   shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex; 
     while (0 !== currentIndex) { 
@@ -61,6 +76,7 @@ export class MoviesService {
           console.log(error);
         },
       () => {
+        //console.log(JSON.stringify(this.existentMovies,null,'\t'));
         this.loadedListCompleted = true;
         this.arraysFilled = true;
       }
@@ -105,18 +121,27 @@ export class MoviesService {
 
   httpPutMovie(){
     var csvString = this.parseObjectToCSV(this.movieToPostOrPut);
-    this.http.post('assets/MovieDBcsv.csv', csvString, {responseType: 'text'})   
-    .subscribe(
-        res => {
-          console.log(res);
-        },
-        error => {
-          console.log(error);
-        },
-      () => {
-      }
-    )
-  }
+    var newLine = "\r\n";
+
+    
+    // fs.stat('MovieDBcsv.csv', function (err, stat) {
+    //   if (err == null) {
+    //       console.log('File exists'); 
+    //       //write the actual data and end with newline
+    //       var csv = csvString + newLine;
+  
+    //       fs.appendFile('MovieDBcsv.csv', csv, function (err) {
+    //           if (err) throw err;
+    //           console.log('The "data to append" was appended to file!');
+    //       });
+    //   }
+    //   else {
+    //     console.log(err);
+    //     console.log(stat);
+    //   }
+
+    // });
+}
 
   parseObjectToCSV(movie: Movie) {    
     
