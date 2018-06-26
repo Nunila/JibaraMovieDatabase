@@ -13,7 +13,6 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import { DataService } from './services/data.service';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -47,7 +46,7 @@ declare var require: any;
     MatIconModule,
     AppRoutingModule
   ],
-  providers: [MoviesService, DataService],
+  providers: [MoviesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

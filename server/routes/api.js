@@ -28,7 +28,7 @@ let response = {
 };
 
 //Do more end points qwer
-// Get users
+// Get movies
 router.get('/allMovies', (req, res) => {
     connection((db) => {
         db.collection('AllMovies')
@@ -43,5 +43,18 @@ router.get('/allMovies', (req, res) => {
             });
     });
 });
+
+//Post Movies
+router.post('/postMovie', (req, res) => {
+    connection((db) => {
+        db.collection('AllMovies').insert(req.body)
+        .then(contestacion => {
+            response.data = contestacion;
+            response.message = res;
+        })
+                   
+    });
+})
+
 
 module.exports = router;

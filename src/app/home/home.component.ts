@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {MoviesService} from '../services/movies-service/movies.service'
 import {Movie} from '../services/movies-service/movies'
 
-import {DataService} from '../services/data.service'
 
 @Component({
   selector: 'app-home',
@@ -22,20 +21,17 @@ export class HomeComponent implements OnInit {
   private groceryList = new Array;
 
 
-  constructor(private moviesService: MoviesService, private dataService:DataService) { }
+  constructor(private moviesService: MoviesService) { }
 
   ngOnInit() {
-    if (this.moviesService.getAllMovies().length < 1)    this.moviesService.httpGetAllMovies();
-
-    this.dataService.getUsers()
-        .subscribe(res => this.users = res);
+    //if (this.moviesService.getAllMovies().length < 1)    this.moviesService.httpGetAllMovies();
+    if (this.moviesService.getAllMovies().length <1)  this.moviesService.httpNewGetAllMovies()
+        
   }
 
   setSelectedMovie(ss:string){
     this.moviesService.setSelectedMovie(ss);
   }
-
-
 
   getAllMovWithImg(){
     if (this.initializedAll ==0) {
@@ -53,7 +49,6 @@ export class HomeComponent implements OnInit {
     return this.moviesService.shuffle(this.allMovsPics);
   }
   
-
   getTop5Movies() {
     if (this.initializedTop ==0) {
       this.top5Movies = this.moviesService.getTop5Movies();

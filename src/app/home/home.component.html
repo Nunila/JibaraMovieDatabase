@@ -2,19 +2,6 @@
   <div class="big-cont">
     <img src="../../assets/movie-posters/shutter island hor.jpg" alt="shutterIsland" class="image" style="width:100%">
   </div>
-  
-  
-    <br>
-
-    <h1>Our MongoDB is Working!</h1>
-
-    <ul>
-      <li *ngFor="let user of users">{{ user.name }}</li>
-    </ul>
-
-
-    <br>
-
 
   <div *ngIf=moviesService.loadedListCompleted class="grid all-cont" >
 
@@ -25,8 +12,7 @@
         <a routerLink="/movie_preview/:{{movie.id}}" (click)="setSelectedMovie(movie.id);">View more</a>
       </figcaption>			
     </figure>
-    
-    
+
   </div>
 
 

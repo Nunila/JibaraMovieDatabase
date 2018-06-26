@@ -11,14 +11,28 @@ export class ModifyDBComponent implements OnInit {
 
   private selectedMovieId: string;
   private selectedMovie: Movie;
-  private newMovie: Movie = {} as Movie;
-
+  private newMovie: Movie =   {
+    id: '',
+    title: '',
+    year: '',
+    genres: [],
+    runtime: '',
+    plot: '',
+    originalLanguage: '',
+    director: '',
+    writer: '',
+    mainCast: '',
+    rating: '',
+    nuniReview: '',
+    funFact: '',
+    seen: '',
+    images: [],
+  } ;
   constructor(private moviesService: MoviesService) { }
 
   ngOnInit() {
-    if(this.moviesService.getAllMovies().length < 1)  this.moviesService.httpGetAllMovies();
+    if(this.moviesService.getAllMovies().length < 1)  this.moviesService.httpNewGetAllMovies();
 
-    this.selectedMovieId = "1083";
     this.selectedMovie = this.moviesService.getMovieById(this.selectedMovieId);
     this.setValidate();
   }
@@ -33,28 +47,27 @@ export class ModifyDBComponent implements OnInit {
   }
 
   setValidate(){
-    // // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    // var forms = document.getElementsByClassName('needs-validation');
-    // // Loop over them and prevent submission
-    // var validation = Array.prototype.filter.call(forms, function(form) {
-    //   form.addEventListener('submit', function(event) {
-    //     if (form.checkValidity() === false) {
-    //       this.validPut = false;
-    //       event.preventDefault();
-    //       event.stopPropagation();
-    //     }
-    //     else {
-    //       this.validPut = true;
-    //     }
-    //     form.classList.add('was-validated');
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          this.validPut = false;
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        else {
+          this.validPut = true;
+        }
+        form.classList.add('was-validated');
 
-    //   }, false);
-    // });
+      }, false);
+    });
   }
 
   validateForm(obj: Movie){
     var mess:string = "";
-    if (this.hasCommas(obj))  mess+=" There are values with commas. Please delete them. "
 
     Object.entries(obj).forEach((entry, i) => {
       if (i<11) {
@@ -65,13 +78,6 @@ export class ModifyDBComponent implements OnInit {
     })
     return mess;
   }
-
-  hasCommas(obj: Movie){
-    var a = Object.values(obj)[14].join("/")
-    var ss:string = Object.values(a).join(" ");
-    return  (ss.search(",") > -1); 
-  }
-
   //------------------------------//
 
   submitPUT(){
@@ -81,12 +87,11 @@ export class ModifyDBComponent implements OnInit {
     }
     else {
       this.moviesService.movieToPostOrPut = this.selectedMovie;
-      this.moviesService.httpPutMovie();
     }  
   }
 
-  submitPOST(){
-
+  postNewMovie(){
+    this.moviesService.httpPostMovie(this.newMovie);
   }
 
 }

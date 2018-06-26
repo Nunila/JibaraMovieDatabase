@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { map } from "rxjs/operators";
+
+
 import {Movie, MovieOption} from './movies'
 import * as fs from "fs";
 
@@ -18,7 +22,10 @@ import * as fs from "fs";
 
 
 export class MoviesService {
-  private existentMovies: Array<Movie> = new Array();
+  //private existentMovies: Array<Movie> = new Array();
+
+  private allMovies: Array<Movie> = new Array();
+
   private allMoviesWithImg: Array<Movie> = new Array();
   private top5: Array<Movie> = new Array();
 
@@ -46,7 +53,9 @@ export class MoviesService {
   public loadedListCompleted = false;
   public arraysFilled = false;
 
-  constructor(private http: HttpClient) { }
+  private result;
+
+  constructor(private _http: HttpClient, private http:Http) { }
 
 
 
@@ -66,102 +75,104 @@ export class MoviesService {
 
   //---------------GET-------------------------------//
 
-  httpGetAllMovies(){
-    this.http.get('assets/MovieDBcsv.csv', {responseType: 'text'})
-    .subscribe(
-        data => {
-          this.parseCSVToObject(data);
-        },
-        error => {
-          console.log(error);
-        },
-      () => {
-        //console.log(JSON.stringify(this.existentMovies,null,'\t'));
-        this.loadedListCompleted = true;
-        this.arraysFilled = true;
-      }
-    )
-  }
+  // httpGetAllMovies(){
+  //   this._http.get('assets/MovieDBcsv.csv', {responseType: 'text'})
+  //   .subscribe(
+  //       data => {
+  //         this.parseCSVToObject(data);
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       },
+  //     () => {
+  //       //console.log(JSON.stringify(this.existentMovies,null,'\t'));
+  //       this.loadedListCompleted = true;
+  //       this.arraysFilled = true;
+  //     }
+  //   )
+  // }
 
-  parseCSVToObject(csv :string) {
-    var rows:string[] = csv.split('\n')
-    rows.splice(0,1);
+  // parseCSVToObject(csv :string) {
+  //   var rows:string[] = csv.split('\n')
+  //   rows.splice(0,1);
 
-    this.existentMovies = rows.map((val,i) => {
-      var properties = val.split(',');
-      var genres, files;
-      if (properties[3])  genres = properties[3].split(' ').join('/');
-      else genres = properties[3];
-      if (properties[14]) files = properties[14].split('/'); 
-      else files = properties[14];
-      return {
-        id: properties[0].toString(),
-        title: properties[1],
-        year: properties[2],
-        genres: genres,
-        runtime: properties[4],
-        plot: properties[5],
-        originalLanguage: properties[6],
-        director: properties[7],
-        writer: properties[8],
-        mainCast: properties[9],
-        rating: properties[10],
-        nuniReview: properties[11],
-        funFact: properties[12],
-        seen: properties[13],
-        images: files
-      }       
-    });
+  //   var a = rows.map((val,i) => {
+  //     var properties = val.split(',');
+  //     var genres, files;
+  //     if (properties[3])  genres = properties[3].split(' ').join('/');
+  //     else genres = properties[3];
+  //     if (properties[14]) files = properties[14].split('/'); 
+  //     else files = properties[14];
+  //     return {
+  //       id: properties[0].toString(),
+  //       _id: 'wo',
+  //       title: properties[1],
+  //       year: properties[2],
+  //       genres: genres,
+  //       runtime: properties[4],
+  //       plot: properties[5],
+  //       originalLanguage: properties[6],
+  //       director: properties[7],
+  //       writer: properties[8],
+  //       mainCast: properties[9],
+  //       rating: properties[10],
+  //       nuniReview: properties[11],
+  //       funFact: properties[12],
+  //       seen: properties[13],
+  //       images: files
+  //     }       
+  //   });
+  //   this.fillOtherMovieArr();
+  // }
 
-    this.existentMovies.pop();
-    this.fillOtherMovieArr();
+  //-------------------MongoDB GET---------------------------------//
+
+  // return this.http.get("/api/allMovies")
+  //     .pipe(map(result => this.allMovies = result.json().data
+  //     ))
+  httpNewGetAllMovies() {   
+    this._http.get("/api/allMovies")
+      .subscribe(res => {
+        this.allMovies = res['data'].map(movie => {
+          return {
+            id: movie._id,
+            title: movie.title,
+            year: movie.year,
+            genres: movie.genres,
+            runtime: movie.runtime,
+            plot: movie.plot,
+            originalLanguage: movie.originalLanguage,
+            director: movie.director,
+            writer: movie.writer,
+            mainCast: movie.mainCast,
+            rating: movie.rating,
+            nuniReview: movie.nuniReview,
+            funFact: movie.funFact,
+            seen: movie.seen,
+            images: movie.images, 
+          }
+        });
+
+        this.fillOtherMovieArr();
+
+      }, null, ()=> {
+      this.loadedListCompleted = true;
+      this.arraysFilled = true;
+    })
   }
 
   //------------------- POST and PUT ----------------------------------//
 
-  httpPutMovie(){
-    var csvString = this.parseObjectToCSV(this.movieToPostOrPut);
-    var newLine = "\r\n";
-
-    
-    // fs.stat('MovieDBcsv.csv', function (err, stat) {
-    //   if (err == null) {
-    //       console.log('File exists'); 
-    //       //write the actual data and end with newline
-    //       var csv = csvString + newLine;
-  
-    //       fs.appendFile('MovieDBcsv.csv', csv, function (err) {
-    //           if (err) throw err;
-    //           console.log('The "data to append" was appended to file!');
-    //       });
-    //   }
-    //   else {
-    //     console.log(err);
-    //     console.log(stat);
-    //   }
-
-    // });
-}
-
-  parseObjectToCSV(movie: Movie) {    
-    
-    Object.entries(movie).forEach(entry => {
-      if (entry[0] == "images"){
-        this.modelPostPut.images = entry[1].join("/");
-      }
-      else {
-        this.modelPostPut[entry[0]] = entry[1];
-      }
-    })
-
-    var csv:string = Object.values(this.modelPostPut).join(",");
-    return csv;
-
+  httpPostMovie(newmov:Movie) {   
+    this._http.post("/api/postMovie", newmov)
+      .subscribe(res => {
+        console.log(res);
+      })
   }
-  
+
   //---------------------------------------//
   fillOtherMovieArr(){
-    this.existentMovies.forEach(movie => {
+    this.allMovies.forEach(movie => {
       //Movies with image
       if (movie.images[0]) {
         if (movie.images[0].length >1)
@@ -172,6 +183,18 @@ export class MoviesService {
 
     });
   }
+  // fillOtherMovieArr(){
+  //   this.existentMovies.forEach(movie => {
+  //     //Movies with image
+  //     if (movie.images[0]) {
+  //       if (movie.images[0].length >1)
+  //       this.allMoviesWithImg.push(movie);
+  //     }
+  //     //movie options
+  //     this.movieOptions.push({value: movie.id, text: movie.title});
+
+  //   });
+  // }
 
   setSelectedMovie(newId:string){
     this.selectedMovie = this.getMovieById(newId);
@@ -184,18 +207,18 @@ export class MoviesService {
   //---------------Custom lists---------------------//
 
   getAllMovies(){
-    return this.existentMovies
+    return this.allMovies
   }
 
   getMovieById(lookupId){    
-    var r =  this.existentMovies.find(function(movie){
+    var r =  this.allMovies.find(function(movie){
       return movie.id == lookupId;
     });
     return r;
   }
   
   getTop5Movies(){
-    if (this.existentMovies) {
+    if (this.allMovies) {
       var top1 = this.getMovieById('1000'), //Get out
     top2 = this.getMovieById('1029'), //The one i love
     top3 = this.getMovieById('1050'), //django
