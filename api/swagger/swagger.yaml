@@ -2,8 +2,8 @@ swagger: "2.0"
 info:
   version: "1.0.0"
   title: Movie Data Base
-host: localhost:4200
-basePath: /Movie_DB
+host: localhost:3000
+basePath: /api/mean
 schemes:
   - http
 consumes:
@@ -11,16 +11,21 @@ consumes:
 produces:
   - application/json
 paths:
-  /movie:
+  /allMovies:
     get:
       description: Get all of the movies in the Data Base. 
       summary: Get all movies. 
       operationId: GetOperations
       parameters:
-        - name: Title
-          in: query
-          description: Movie title
-          type: string
+      - in: "body"
+        name: "body"
+        description: "Pet object that needs to be added to the store"
+        required: true
+        schema:
+          type: object
+          properties:
+            title: 
+              type: string 
       responses:
         "200":
           description: success
@@ -29,6 +34,8 @@ paths:
             properties: 
               title:
                 type: string
+        405:
+          description: "Invalid input"
     post:
       tags:
       - "movie"

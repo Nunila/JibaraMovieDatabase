@@ -17,11 +17,20 @@
     cursor: pointer;
 } */
 
+/*---------------------------------*/
+
 .big-cont img{
 	height:420px;
 }
 
-/*---------------------------------*/
+#modifyDB {
+	
+	position: absolute;
+	top:200px;
+	left: 100px;
+	font-family: 'Krona One', sans-serif;
+}
+
 
 
 /*---------------------------------*/

@@ -3,6 +3,40 @@ const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 
+
+//-----------mongoose tutorial ---//
+var mongoose = require('mongoose');
+ 
+mongoose.connect('mongodb://localhost:27017/mean', function (err) {
+    if (err) throw err;  
+    console.log('Successfully connected');
+});
+
+var movieSchema = mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    id: '',
+    title: '',
+    year: '',
+    genres: '',
+    runtime: '',
+    plot: '',
+    originalLanguage: '',
+    director: '',
+    writer: '',
+    mainCast: '',
+    rating:'',
+    nuniReview: '',
+    funFact: '',
+    seen: '',
+    images: '',
+    created: { 
+        type: Date,
+        default: Date.now
+    }
+});
+
+var Movie = mongoose.model('Movie', movieSchema);
+
 // Connect
 const connection = (closure) => {
     return MongoClient.connect('mongodb://localhost:27017/mean', (err, client) => {
@@ -44,17 +78,39 @@ router.get('/allMovies', (req, res) => {
     });
 });
 
-//Post Movies
+//Post Movie
 router.post('/postMovie', (req, res) => {
-    connection((db) => {
+   connection((db) => {
         db.collection('AllMovies').insert(req.body)
-        .then(contestacion => {
-            response.data = contestacion;
-            response.message = res;
+        .then((reser) => {
+            response.data = reser;
+            res.json(response);
+            //res.send(response);
         })
+        .catch((err) => {
+            sendError(err, res);
+        });
                    
     });
 })
+
+//Put Movie
+router.put('/modifyExistentMovie/:id', (req, res) => {
+    var movie = req.body
+    connection((db) => {
+        db.collection('AllMovies').findOneAndReplace( 
+            { id : movie.id},            
+            movie)
+        .then((reser) => {
+            response.data = reser;
+            res.json(response);
+        })
+        .catch((err) => {
+            sendError(err, res);
+        });
+                    
+    });
+ })
 
 
 module.exports = router;

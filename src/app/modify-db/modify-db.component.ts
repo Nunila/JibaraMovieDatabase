@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../services/movies-service/movies.service'
 import { Movie } from '../services/movies-service/movies'
 
+import * as $ from 'jquery';
+
+
 @Component({
   selector: 'app-modify-db',
   templateUrl: './modify-db.component.html',
@@ -61,7 +64,6 @@ export class ModifyDBComponent implements OnInit {
           this.validPut = true;
         }
         form.classList.add('was-validated');
-
       }, false);
     });
   }
@@ -80,17 +82,14 @@ export class ModifyDBComponent implements OnInit {
   }
   //------------------------------//
 
-  submitPUT(){
-    var result = this.validateForm(this.selectedMovie);
-    if(result.length > 1) {
-      alert(result);
-    }
-    else {
-      this.moviesService.movieToPostOrPut = this.selectedMovie;
-    }  
+  putMovie(){
+    console.log(this.selectedMovie)
+    this.moviesService.httpPutMovie(this.selectedMovie);
   }
 
   postNewMovie(){
+    //$('#wo').show();
+    //this.validateForm(this.newMovie);
     this.moviesService.httpPostMovie(this.newMovie);
   }
 

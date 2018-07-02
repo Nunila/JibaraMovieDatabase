@@ -32,14 +32,14 @@
           </div>
           <div class="form-group col-md-4">
             <label for="inputYear">Runtime (min)</label>
-            <input type="number" [(ngModel)]="newMovie.id" required name="runtime"class="form-control" id="inputYear" placeholder="Runtime">
+            <input type="number" [(ngModel)]="newMovie.runtime" required name="runtime"class="form-control" id="inputYear" placeholder="Runtime">
             <div class="invalid-feedback">
               Please provide a value.
             </div>
           </div>
           <div class="form-group col-md-4">
             <label for="inputLanguage">Original Language</label>
-            <input type="text" [(ngModel)]="newMovie.originalLanguage" required name="lan"class="form-control" id="inputLanguage" placeholder="Original Language">
+            <input type="text" [(ngModel)]="newMovie.originalLanguage" required name="lan" class="form-control" id="inputLanguage" placeholder="Original Language">
             <div class="invalid-feedback">
               Please provide a value.
             </div>
@@ -113,6 +113,13 @@
       </div>
       <button (click)="postNewMovie()" type="submit" class="btn btn-primary">Submit POST</button>
     </form>
+  </div>
+
+  <div class="alert alert-warning alert-dismissible collapse" role="alert" id='wo'>
+    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
 
   <!-- <div style="border-left:5px solid gray;height:500px;"></div> -->
@@ -234,7 +241,7 @@
           <label class="form-check-label" for="gridCheck">Seen</label>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary" (click)=submitPUT()>Submit PUT</button>
+      <button type="submit" class="btn btn-primary" (click)=putMovie()>Submit PUT</button>
     </form>
   </div>
 

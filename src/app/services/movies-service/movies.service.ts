@@ -31,7 +31,6 @@ export class MoviesService {
 
   private movieOptions: Array<MovieOption> = new Array();
   public selectedMovie: Movie;
-  public movieToPostOrPut: Movie;
   private modelPostPut = {
     id: null,
     title: null,
@@ -56,10 +55,6 @@ export class MoviesService {
   private result;
 
   constructor(private _http: HttpClient, private http:Http) { }
-
-
-
-  //--------------------------//
 
   shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex; 
@@ -152,7 +147,6 @@ export class MoviesService {
             images: movie.images, 
           }
         });
-
         this.fillOtherMovieArr();
 
       }, null, ()=> {
@@ -164,12 +158,25 @@ export class MoviesService {
   //------------------- POST and PUT ----------------------------------//
 
   httpPostMovie(newmov:Movie) {   
-    this._http.post("/api/postMovie", newmov)
-      .subscribe(res => {
-        console.log(res);
-      })
+    this.http.post("/api/postMovie", newmov).subscribe(res => {
+      var json = res.json()
+      console.log(json);
+      if (json.status == 200) {
+        this.allMovies.push(newmov);
+      }
+      else alert(res.json());
+    });
   }
 
+  httpPutMovie(modMovie:Movie) {
+    this.http.put("/api/modifyExistentMovie/:id", modMovie).subscribe(res => {
+      var json = res.json()
+      console.log(json);
+      if (json.status == 200) {
+      }
+      else alert(res.json());
+    });
+  }
   //---------------------------------------//
   fillOtherMovieArr(){
     this.allMovies.forEach(movie => {
@@ -183,18 +190,6 @@ export class MoviesService {
 
     });
   }
-  // fillOtherMovieArr(){
-  //   this.existentMovies.forEach(movie => {
-  //     //Movies with image
-  //     if (movie.images[0]) {
-  //       if (movie.images[0].length >1)
-  //       this.allMoviesWithImg.push(movie);
-  //     }
-  //     //movie options
-  //     this.movieOptions.push({value: movie.id, text: movie.title});
-
-  //   });
-  // }
 
   setSelectedMovie(newId:string){
     this.selectedMovie = this.getMovieById(newId);
