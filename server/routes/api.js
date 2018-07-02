@@ -3,9 +3,11 @@ const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 
+var ObjectId = require('mongodb').ObjectID;
 
 //-----------mongoose tutorial ---//
 var mongoose = require('mongoose');
+
  
 mongoose.connect('mongodb://localhost:27017/mean', function (err) {
     if (err) throw err;  
@@ -99,7 +101,7 @@ router.put('/modifyExistentMovie/:id', (req, res) => {
     var movie = req.body
     connection((db) => {
         db.collection('AllMovies').findOneAndReplace( 
-            { id : movie.id},            
+            { "_id" : ObjectId(movie.id)},            
             movie)
         .then((reser) => {
             response.data = reser;
