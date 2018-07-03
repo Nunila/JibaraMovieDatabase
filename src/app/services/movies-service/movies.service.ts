@@ -5,7 +5,7 @@ import { map } from "rxjs/operators";
 
 
 import {Movie, MovieOption} from './movies'
-import * as fs from "fs";
+import swal from 'sweetalert2';
 
 // var MongoClient = require('mongodb').MongoClient;
 
@@ -173,6 +173,15 @@ export class MoviesService {
       var json = res.json()
       console.log(json);
       if (json.status == 200) {
+         
+        swal({
+          type: 'success',
+          title: 'The movie has been updated!',
+          text: 'Resulting Object:',
+          input: 'textarea',
+          inputValue: JSON.stringify(json.data.value,null, "\t"),
+          inputClass: 'small-text'
+        })
       }
       else alert(res.json());
     });

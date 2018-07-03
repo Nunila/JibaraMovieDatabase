@@ -33,6 +33,7 @@
     "nodemon": "^1.17.5",
     "rxjs": "^6.0.0",
     "swagger-ui": "^3.17.1",
+    "sweetalert2": "^7.24.4",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

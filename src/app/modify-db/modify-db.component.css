@@ -1,27 +1,34 @@
 
-.flex-container-row {
-    margin-top: -40px;
+.flex-container-column {
+    background-image: url(./../../assets/backgrounds/superbigcollage.jpg);
+    /* background-size: 100% 100%;  */
+    margin-top: -70px;
     display: flex;
-    flex-direction: row-reverse;   
-    justify-content: space-between;
-    padding: 10px;
+    flex-direction: column-reverse;   
+    justify-content: center;
 }
 .new-movie-cont {
-    width: 50%;
-    margin: 5px;
-    padding: 10px;
-    border: solid 2px orangered;
-    border-style: dashed;
-    border-radius: 10px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .modify-cont {
-    width: 50%;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.intermediario {
+    width: 60%; 
+    padding: 15px;
+    background: rgb(255, 255, 255, 0.9);
     margin: 5px;
-    padding: 10px;
-    border: solid 2px black;
-    border-style: dashed;
-    border-radius: 10px;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);   */
+}
+
+.header {
+    border-bottom: 2px black dashed;
 }
 
 /*----------------------------------------*/
@@ -32,3 +39,33 @@ h2 {
 .form-group label {
     font-family: 'Titan One';
 }
+
+.new-mov {
+    width: 120px;
+    height: 60px;
+    border-radius: 0; 
+    font-family: 'Titan One'; 
+    font-size: 2rem;
+    background-color: #f13c20; 
+    color: white; 
+    border: #f13c20;
+}
+
+input {
+    border-radius: 0%;
+    border-color: transparent;
+    /* background-color: rgba(254, 69, 30, 0.15) */
+}
+
+select {
+    border-radius: 0%;
+    border-color: transparent;
+    /* background-color: rgba(254, 69, 30, 0.15) */
+}
+
+textarea {
+    border-radius: 0%;    
+    border-color: transparent;
+    /* background-color: rgba(254, 69, 30, 0.15) */
+}
+

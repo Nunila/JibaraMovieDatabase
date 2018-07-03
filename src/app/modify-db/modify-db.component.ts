@@ -3,6 +3,7 @@ import { MoviesService } from '../services/movies-service/movies.service'
 import { Movie } from '../services/movies-service/movies'
 
 import * as $ from 'jquery';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -83,7 +84,6 @@ export class ModifyDBComponent implements OnInit {
   //------------------------------//
 
   putMovie(){
-    console.log(this.selectedMovie)
     this.moviesService.httpPutMovie(this.selectedMovie);
   }
 

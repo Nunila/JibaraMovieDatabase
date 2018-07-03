@@ -1,248 +1,250 @@
 <br>
 
-<div class="flex-container-row">
+<div class="flex-container-column">
 
   <div class="new-movie-cont">
-    <h2 class="text-center">Add New Movie</h2> 
-    <hr>
-    <form class="needs-validation" novalidate>
-      <div class="form-row">
-        <div class="form-group col-md-10">
-          <label for="inputTitle">Title</label>
-          <input type="text" [(ngModel)]="newMovie.title" required name="title" class="form-control" id="inputTitle" placeholder="Movie Title">
+    <div class="intermediario">
+      <div class="header">
+        <h2 class="text-center">Add New Movie</h2> 
+      </div>
+      
+      <form class="needs-validation" novalidate>
+        <div class="form-row">
+          <div class="form-group col-md-10">
+            <label for="inputTitle">Title</label>
+            <input type="text" [(ngModel)]="newMovie.title" required name="title" class="form-control" id="inputTitle" placeholder="Movie Title">
+            <div class="invalid-feedback">
+              Please provide a value.
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputYear">Year</label>
+            <input type="number" [(ngModel)]="newMovie.year" required name="year" class="form-control" id="inputYear" placeholder="Year">
+            <div class="invalid-feedback">
+              Please provide a value.
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="inputGenres">Genres</label>
+              <input type="text" [(ngModel)]="newMovie.genres" required name="genres"class="form-control" id="inputGenres" placeholder="Genres">
+              <div class="invalid-feedback">
+                Please provide a value.
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputYear">Runtime (min)</label>
+              <input type="number" [(ngModel)]="newMovie.runtime" required name="runtime"class="form-control" id="inputYear" placeholder="Runtime">
+              <div class="invalid-feedback">
+                Please provide a value.
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputLanguage">Original Language</label>
+              <input type="text" [(ngModel)]="newMovie.originalLanguage" required name="lan" class="form-control" id="inputLanguage" placeholder="Original Language">
+              <div class="invalid-feedback">
+                Please provide a value.
+              </div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPlot">Plot</label>
+          <textarea [(ngModel)]="newMovie.plot" required name="plot"class="form-control" id="inputPlot" placeholder="Once upon a time..."></textarea>
           <div class="invalid-feedback">
             Please provide a value.
           </div>
         </div>
-        <div class="form-group col-md-2">
-          <label for="inputYear">Year</label>
-          <input type="number" [(ngModel)]="newMovie.year" required name="year" class="form-control" id="inputYear" placeholder="Year">
-          <div class="invalid-feedback">
-            Please provide a value.
-          </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputDirector">Director</label>
+              <input type="text" [(ngModel)]="newMovie.director" required name="director"class="form-control" id="inputDirector" placeholder="Director">
+              <div class="invalid-feedback">
+                  Please provide a value.
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputWriter">Writer</label>
+              <input type="text" [(ngModel)]="newMovie.writer" required name="writer"class="form-control" id="inputWriter" placeholder="Writer">
+              <div class="invalid-feedback">
+                  Please provide a value.
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="form-row">
+        <div class="form-row">
           <div class="form-group col-md-4">
-            <label for="inputGenres">Genres</label>
-            <input type="text" [(ngModel)]="newMovie.genres" required name="genres"class="form-control" id="inputGenres" placeholder="Genres">
-            <div class="invalid-feedback">
-              Please provide a value.
-            </div>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="inputYear">Runtime (min)</label>
-            <input type="number" [(ngModel)]="newMovie.runtime" required name="runtime"class="form-control" id="inputYear" placeholder="Runtime">
-            <div class="invalid-feedback">
-              Please provide a value.
-            </div>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="inputLanguage">Original Language</label>
-            <input type="text" [(ngModel)]="newMovie.originalLanguage" required name="lan" class="form-control" id="inputLanguage" placeholder="Original Language">
-            <div class="invalid-feedback">
-              Please provide a value.
-            </div>
-          </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPlot">Plot</label>
-        <textarea [(ngModel)]="newMovie.plot" required name="plot"class="form-control" id="inputPlot" placeholder="Once upon a time..."></textarea>
-        <div class="invalid-feedback">
-          Please provide a value.
-        </div>
-      </div>
-      <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputDirector">Director</label>
-            <input type="text" [(ngModel)]="newMovie.director" required name="director"class="form-control" id="inputDirector" placeholder="Director">
+            <label for="inputPlot">Main Cast</label>
+            <textarea [(ngModel)]="newMovie.mainCast" required name="cast"class="form-control" id="inputPlot" placeholder="Main Cast"></textarea>
             <div class="invalid-feedback">
                 Please provide a value.
               </div>
           </div>
-          <div class="form-group col-md-6">
-            <label for="inputWriter">Writer</label>
-            <input type="text" [(ngModel)]="newMovie.writer" required name="writer"class="form-control" id="inputWriter" placeholder="Writer">
+          <div class="form-group col-md-8">
+            <label for="inputPlot">Fun Fact</label>
+            <textarea [(ngModel)]="newMovie.funFact" name="fact"class="form-control" id="inputPlot" placeholder="Fun fact?"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <label for="inputState">RT %</label>
+            <input type="number" required class="form-control" placeholder="%%">
             <div class="invalid-feedback">
                 Please provide a value.
               </div>
           </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="inputPlot">Main Cast</label>
-          <textarea [(ngModel)]="newMovie.mainCast" required name="cast"class="form-control" id="inputPlot" placeholder="Main Cast"></textarea>
-          <div class="invalid-feedback">
-              Please provide a value.
-            </div>
+          <div class="form-group col-md-5">
+            <label for="inputZip">Consensus</label>
+            <textarea [(ngModel)]="newMovie.rating" name="rat"rows="1" class="form-control" id="inputZip" placeholder="Rotten Tomatoes Consensus"></textarea>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="inputZip">Nuni's Review</label>
+            <textarea [(ngModel)]="newMovie.nuniReview" name="nunirev"rows="1" class="form-control" id="inputZip" placeholder="Nuni's review if seen."></textarea>
+          </div>
+        </div>     
+        <!-- <div class="form-group">
+          <label>Upload images of the movie.</label>
+        </div> -->
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="validatedCustomFile" multiple>
+          <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
         </div>
-        <div class="form-group col-md-8">
-          <label for="inputPlot">Fun Fact</label>
-          <textarea [(ngModel)]="newMovie.funFact" name="fact"class="form-control" id="inputPlot" placeholder="Fun fact?"></textarea>
+        <div class="form-group">
+          <div class="form-check">
+            <input [(ngModel)]="newMovie.seen" name="seen"class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">Seen</label>
+          </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-2">
-          <label for="inputState">RT %</label>
-          <input type="number" required class="form-control" placeholder="%%">
-          <div class="invalid-feedback">
-              Please provide a value.
-            </div>
+        <div style="display: flex; justify-content: center;">
+          <button class="btn new-mov" (click)="postNewMovie()" type="submit" >Save!</button>
         </div>
-        <div class="form-group col-md-5">
-          <label for="inputZip">Consensus</label>
-          <textarea [(ngModel)]="newMovie.rating" name="rat"rows="1" class="form-control" id="inputZip" placeholder="Rotten Tomatoes Consensus"></textarea>
-        </div>
-        <div class="form-group col-md-5">
-          <label for="inputZip">Nuni's Review</label>
-          <textarea [(ngModel)]="newMovie.nuniReview" name="nunirev"rows="1" class="form-control" id="inputZip" placeholder="Nuni's review if seen."></textarea>
-        </div>
-      </div>     
-      <!-- <div class="form-group">
-        <label>Upload images of the movie.</label>
-      </div> -->
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" id="validatedCustomFile" multiple>
-        <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-      </div>
-      <div class="form-group">
-        <div class="form-check">
-          <input [(ngModel)]="newMovie.seen" name="seen"class="form-check-input" type="checkbox" id="gridCheck">
-          <label class="form-check-label" for="gridCheck">Seen</label>
-        </div>
-      </div>
-      <button (click)="postNewMovie()" type="submit" class="btn btn-primary">Submit POST</button>
-    </form>
-  </div>
-
-  <div class="alert alert-warning alert-dismissible collapse" role="alert" id='wo'>
-    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-
-  <!-- <div style="border-left:5px solid gray;height:500px;"></div> -->
-
-  <div class="modify-cont">
-    <h2 class="text-center">Modify Existent</h2>
-    <hr>
-
-    <div class="form-group">
-      <label>Choose a movie:</label>
-      <select class="custom-select" [(ngModel)]="selectedMovieId" (change)=setSelectedMovie()>
-        <option *ngFor="let movie of getMovOpt()" value="{{movie.value}}">{{movie.text}}</option>
-      </select>
+      </form>
     </div>
-    
-  <form *ngIf="selectedMovieId" class="needs-validation" novalidate>
-      <div class="form-row">
-        <div class="form-group col-md-10">
-          <label for="inputTitle">Title</label>
-          <input type="text" [(ngModel)]="selectedMovie.title" required name="title" class="form-control" id="inputTitle" placeholder="Movie Title">
-          <div class="invalid-feedback">
-            Please provide a value.
-          </div>
-        </div>
-        <div class="form-group col-md-2">
-          <label for="inputYear">Year</label>
-          <input type="number" [(ngModel)]="selectedMovie.year" required name="year" class="form-control" id="inputYear" placeholder="Year">
-          <div class="invalid-feedback">
-            Please provide a value.
-          </div>
-        </div>
+  </div>
+
+<!--////////////////////////////////////////////////////////////////////////////-->
+  <div class="modify-cont">
+    <div class="intermediario">
+      <div class="header">
+        <h2 class="text-center">Modify Existent</h2>
       </div>
-      <div class="form-row">
-          <div class="form-group col-md-4">
-            <label for="inputGenres">Genres</label>
-            <input type="text" [(ngModel)]="selectedMovie.genres" required name="genres"class="form-control" id="inputGenres" placeholder="Genres">
-            <div class="invalid-feedback">
-              Please provide a value.
-            </div>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="inputYear">Runtime (min)</label>
-            <input type="number" [(ngModel)]="selectedMovie.runtime" required name="runtime"class="form-control" id="inputYear" placeholder="Runtime">
-            <div class="invalid-feedback">
-              Please provide a value.
-            </div>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="inputLanguage">Original Language</label>
-            <input type="text" [(ngModel)]="selectedMovie.originalLanguage" required name="lan"class="form-control" id="inputLanguage" placeholder="Original Language">
-            <div class="invalid-feedback">
-              Please provide a value.
-            </div>
-          </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPlot">Plot</label>
-        <textarea [(ngModel)]="selectedMovie.plot" required name="plot"class="form-control" id="inputPlot" placeholder="Once upon a time..."></textarea>
-        <div class="invalid-feedback">
-          Please provide a value.
+        <div class="form-group">
+          <label>Choose a movie:</label>
+          <select class="custom-select" [(ngModel)]="selectedMovieId" (change)=setSelectedMovie()>
+            <option *ngFor="let movie of getMovOpt()" value="{{movie.value}}">{{movie.text}}</option>
+          </select>
         </div>
-      </div>
-      <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputDirector">Director</label>
-            <input type="text" [(ngModel)]="selectedMovie.director" required name="director"class="form-control" id="inputDirector" placeholder="Director">
-            <div class="invalid-feedback">
+        
+      <form *ngIf="selectedMovieId" class="needs-validation" novalidate>
+          <div class="form-row">
+            <div class="form-group col-md-10">
+              <label for="inputTitle">Title</label>
+              <input type="text" [(ngModel)]="selectedMovie.title" required name="title" class="form-control" id="inputTitle" placeholder="Movie Title">
+              <div class="invalid-feedback">
                 Please provide a value.
               </div>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputWriter">Writer</label>
-            <input type="text" [(ngModel)]="selectedMovie.writer" required name="writer"class="form-control" id="inputWriter" placeholder="Writer">
-            <div class="invalid-feedback">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="inputYear">Year</label>
+              <input type="number" [(ngModel)]="selectedMovie.year" required name="year" class="form-control" id="inputYear" placeholder="Year">
+              <div class="invalid-feedback">
                 Please provide a value.
               </div>
+            </div>
           </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="inputPlot">Main Cast</label>
-          <textarea [(ngModel)]="selectedMovie.mainCast" required name="cast"class="form-control" id="inputPlot" placeholder="Main Cast"></textarea>
-          <div class="invalid-feedback">
+          <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="inputGenres">Genres</label>
+                <input type="text" [(ngModel)]="selectedMovie.genres" required name="genres"class="form-control" id="inputGenres" placeholder="Genres">
+                <div class="invalid-feedback">
+                  Please provide a value.
+                </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputYear">Runtime (min)</label>
+                <input type="number" [(ngModel)]="selectedMovie.runtime" required name="runtime"class="form-control" id="inputYear" placeholder="Runtime">
+                <div class="invalid-feedback">
+                  Please provide a value.
+                </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputLanguage">Original Language</label>
+                <input type="text" [(ngModel)]="selectedMovie.originalLanguage" required name="lan"class="form-control" id="inputLanguage" placeholder="Original Language">
+                <div class="invalid-feedback">
+                  Please provide a value.
+                </div>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPlot">Plot</label>
+            <textarea [(ngModel)]="selectedMovie.plot" required name="plot"class="form-control" id="inputPlot" placeholder="Once upon a time..."></textarea>
+            <div class="invalid-feedback">
               Please provide a value.
             </div>
-        </div>
-        <div class="form-group col-md-8">
-          <label for="inputPlot">Fun Fact</label>
-          <textarea [(ngModel)]="selectedMovie.funFact" name="fact"class="form-control" id="inputPlot" placeholder="Fun fact?"></textarea>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-2">
-          <label for="inputState">RT %</label>
-          <input type="number" required class="form-control" placeholder="%%">
-          <div class="invalid-feedback">
-              Please provide a value.
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputDirector">Director</label>
+                <input type="text" [(ngModel)]="selectedMovie.director" required name="director"class="form-control" id="inputDirector" placeholder="Director">
+                <div class="invalid-feedback">
+                    Please provide a value.
+                  </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputWriter">Writer</label>
+                <input type="text" [(ngModel)]="selectedMovie.writer" required name="writer"class="form-control" id="inputWriter" placeholder="Writer">
+                <div class="invalid-feedback">
+                    Please provide a value.
+                  </div>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="inputPlot">Main Cast</label>
+              <textarea [(ngModel)]="selectedMovie.mainCast" required name="cast"class="form-control" id="inputPlot" placeholder="Main Cast"></textarea>
+              <div class="invalid-feedback">
+                  Please provide a value.
+                </div>
             </div>
-        </div>
-        <div class="form-group col-md-5">
-          <label for="inputZip">Consensus</label>
-          <textarea [(ngModel)]="selectedMovie.rating" name="rat"rows="1" class="form-control" id="inputZip" placeholder="Rotten Tomatoes Consensus"></textarea>
-        </div>
-        <div class="form-group col-md-5">
-          <label for="inputZip">Nuni's Review</label>
-          <textarea [(ngModel)]="selectedMovie.nuniReview" name="nunirev"rows="1" class="form-control" id="inputZip" placeholder="Nuni's review if seen."></textarea>
-        </div>
-      </div>     
-      <!-- <div class="form-group">
-        <label>Upload images of the movie.</label>
-      </div> -->
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" id="validatedCustomFile" multiple>
-        <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-      </div>
-      <div class="form-group">
-        <div class="form-check">
-          <input [(ngModel)]="selectedMovie.seen" name="seen"class="form-check-input" type="checkbox" id="gridCheck">
-          <label class="form-check-label" for="gridCheck">Seen</label>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary" (click)=putMovie()>Submit PUT</button>
-    </form>
+            <div class="form-group col-md-8">
+              <label for="inputPlot">Fun Fact</label>
+              <textarea [(ngModel)]="selectedMovie.funFact" name="fact"class="form-control" id="inputPlot" placeholder="Fun fact?"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <label for="inputState">RT %</label>
+              <input type="number" required class="form-control" placeholder="%%">
+              <div class="invalid-feedback">
+                  Please provide a value.
+                </div>
+            </div>
+            <div class="form-group col-md-5">
+              <label for="inputZip">Consensus</label>
+              <textarea [(ngModel)]="selectedMovie.rating" name="rat"rows="1" class="form-control" id="inputZip" placeholder="Rotten Tomatoes Consensus"></textarea>
+            </div>
+            <div class="form-group col-md-5">
+              <label for="inputZip">Nuni's Review</label>
+              <textarea [(ngModel)]="selectedMovie.nuniReview" name="nunirev"rows="1" class="form-control" id="inputZip" placeholder="Nuni's review if seen."></textarea>
+            </div>
+          </div>     
+          <!-- <div class="form-group">
+            <label>Upload images of the movie.</label>
+          </div> -->
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="validatedCustomFile" multiple>
+            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input [(ngModel)]="selectedMovie.seen" name="seen"class="form-check-input" type="checkbox" id="gridCheck">
+              <label class="form-check-label" for="gridCheck">Seen</label>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: center;">
+            <button class="btn new-mov" (click)="putMovie()" type="submit" >Save!</button>
+          </div>
+        </form>
+    </div>   
   </div>
 
 

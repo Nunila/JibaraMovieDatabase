@@ -5,26 +5,20 @@
 	color: white;
 	display: flex;
 	flex-direction: column;
-    /* background: linear-gradient(to bottom right, black, darkgray); */
-    background-color:#e9ecef;
+	background-image: url(./../../assets/backgrounds/superbigcollage.jpg);
+	    /* background-color:#e9ecef; */
 }
 
 .carousel-item img {
     max-height:390px
 }
-
-/* img {
-    cursor: pointer;
-} */
-
 /*---------------------------------*/
 
 .big-cont img{
 	height:420px;
 }
 
-#modifyDB {
-	
+#modifyDB {	
 	position: absolute;
 	top:200px;
 	left: 100px;
@@ -45,7 +39,7 @@ figcaption {
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-	background-color: #e9ecef;
+	/* background-color: #e9ecef; */
 	text-align: center;
 
 }

@@ -16,6 +16,10 @@ import { HttpModule } from '@angular/http';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
+
 import { HomeComponent } from './home/home.component';
 import { MoviePreviewComponent } from './movie-preview/movie-preview.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -44,6 +48,10 @@ declare var require: any;
     
     MatButtonModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+
+
     AppRoutingModule
   ],
   providers: [MoviesService],
