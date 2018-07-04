@@ -5,8 +5,9 @@
 	color: white;
 	display: flex;
 	flex-direction: column;
-	background-image: url(./../../assets/backgrounds/superbigcollage.jpg);
-	    /* background-color:#e9ecef; */
+	background-image: url(./../../assets/backgrounds/popcorn1Edit.jpg);
+	background-attachment: fixed;
+	/* background-color:#e9ecef; */
 }
 
 .carousel-item img {
@@ -34,7 +35,6 @@ figcaption {
 
 .all-cont {
     margin: 5px;
-    margin-top: -20px;   
 	display: flex; 
 	flex-direction: row;
 	flex-wrap: wrap;

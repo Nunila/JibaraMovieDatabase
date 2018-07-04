@@ -1,7 +1,7 @@
 
 .flex-container-column {
-    background-image: url(./../../assets/backgrounds/superbigcollage.jpg);
-    /* background-size: 100% 100%;  */
+    background-image: url(./../../assets/backgrounds/popcorn1Edit.jpg);
+    background-attachment: fixed;
     margin-top: -70px;
     display: flex;
     flex-direction: column-reverse;   
@@ -22,11 +22,14 @@
 .intermediario {
     width: 60%; 
     padding: 15px;
-    background: rgb(255, 255, 255, 0.9);
+    /* background: rgb(255, 255, 255, 0.9); */
     margin: 5px;
     /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);   */
 }
 
+/* .modify-cont .intermediario {
+    border-bottom: 3px black double;
+} */
 .header {
     border-bottom: 2px black dashed;
 }
