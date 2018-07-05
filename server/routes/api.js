@@ -87,7 +87,6 @@ router.post('/postMovie', (req, res) => {
         .then((reser) => {
             response.data = reser;
             res.json(response);
-            //res.send(response);
         })
         .catch((err) => {
             sendError(err, res);
@@ -102,7 +101,8 @@ router.put('/modifyExistentMovie/:id', (req, res) => {
     connection((db) => {
         db.collection('AllMovies').findOneAndReplace( 
             { "_id" : ObjectId(movie.id)},            
-            movie)
+            movie, 
+            {returnNewDocument: true})
         .then((reser) => {
             response.data = reser;
             res.json(response);
