@@ -102,7 +102,8 @@ router.put('/modifyExistentMovie/:id', (req, res) => {
     connection((db) => {
         db.collection('AllMovies').findOneAndReplace( 
             { "_id" : ObjectId(movie.id)},            
-            movie)
+            movie,
+            {returnNewDocument: true, returnOriginal: false, new: true})
         .then((reser) => {
             response.data = reser;
             res.json(response);
