@@ -4,6 +4,7 @@
     <!-- <button id="modifyDB" mat-raised-button><h3>Click me!</h3></button>
     <img src="../../assets/movie-posters/shutter island hor.jpg" alt="shutterIsland" class="image" style="width:100%">
   </div> -->
+  <button class="btn btn-warning" (click)="moviesService.firebaseGet()">Click me to get</button>
 
   <div *ngIf=moviesService.loadedListCompleted class="grid all-cont" >
 

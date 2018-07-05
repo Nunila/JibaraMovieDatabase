@@ -3,9 +3,13 @@ import {HttpClient} from '@angular/common/http'
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { map } from "rxjs/operators";
 
-
 import {Movie, MovieOption} from './movies'
+
 import swal from 'sweetalert2';
+var firebase = require("firebase");
+
+
+
 
 // var MongoClient = require('mongodb').MongoClient;
 
@@ -23,8 +27,11 @@ import swal from 'sweetalert2';
 
 export class MoviesService {
   //private existentMovies: Array<Movie> = new Array();
+  private firebaseDB;
 
   private allMovies: Array<Movie> = new Array();
+  private TESTallMovies: Array<Movie> = new Array();
+
 
   private allMoviesWithImg: Array<Movie> = new Array();
   private top5: Array<Movie> = new Array();
@@ -54,7 +61,21 @@ export class MoviesService {
 
   private result;
 
-  constructor(private _http: HttpClient, private http:Http) { }
+  constructor(private _http: HttpClient, private http:Http) {
+    // Initialize Firebase
+    // TODO: Replace with your project's customized code snippet
+    var config = {
+        apiKey: "AIzaSyDidGk8b07SkZ4PF8uoAa5mum4FD4El1Qc",
+        authDomain: "jibaramoviedatabase.firebaseapp.com",
+        databaseURL: "https://jibaramoviedatabase.firebaseio.com",
+        projectId: "jibaramoviedatabase",
+        storageBucket: "jibaramoviedatabase.appspot.com",
+        messagingSenderId: "1003292774172"
+    };
+    firebase.initializeApp(config);
+    this.firebaseDB = firebase.database();
+
+   }
 
   shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex; 
@@ -67,6 +88,35 @@ export class MoviesService {
     }  
     return array;
   }
+
+  //-----------------Firebase HTTP-----------------------------------------//
+  firebasePOST(newMov:Movie){
+    var newPostKey = firebase.database().ref().child('movies').push().key;
+    newMov.id = newPostKey;
+    var updates = {};
+    updates['/movies/' + newPostKey] = newMov;
+
+    firebase.database().ref().update(updates); 
+  }
+
+  firebasePut(movie:Movie) {
+    firebase.database().ref('/movies/' + movie.id).set(movie);
+  }
+
+  firebaseGet(){
+    var userId = firebase.auth().currentUser;
+    var a = this;
+    firebase.database().ref('/movies/').once('value').then(function(snapshot) {
+      a.TESTallMovies = Object.values(snapshot.val());
+    });
+
+    if(this.TESTallMovies) {
+      this.allMovies = this.TESTallMovies;
+      this.loadedListCompleted = true;
+      this.fillOtherMovieArr();
+    }
+  }
+
 
   //---------------GET-------------------------------//
 
@@ -128,6 +178,7 @@ export class MoviesService {
   httpNewGetAllMovies() {   
     this._http.get("/api/allMovies")
       .subscribe(res => {
+        if (res['status'] == 404) return res;
         this.allMovies = res['data'].map(movie => {
           return {
             id: movie._id,
@@ -149,7 +200,13 @@ export class MoviesService {
         });
         this.fillOtherMovieArr();
 
-      }, null, ()=> {
+      }, 
+      (error) => {
+        console.log(error);
+        return error
+      }, 
+      ()=> {
+        console.log('wp')
       this.loadedListCompleted = true;
       this.arraysFilled = true;
     })
