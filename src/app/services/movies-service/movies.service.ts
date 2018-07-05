@@ -3,18 +3,10 @@ import {HttpClient} from '@angular/common/http'
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { map } from "rxjs/operators";
 
-
 import {Movie, MovieOption} from './movies'
+
 import swal from 'sweetalert2';
-
-// var MongoClient = require('mongodb').MongoClient;
-
-// var uri = "mongodb+srv://nunila:<Alemania18>@mymoviedatabase-xue51.mongodb.net/movies?retryWrites=true";
-// MongoClient.connect(uri, function(err, client) {
-//    const collection = client.db("movies").collection("devices");
-//    // perform actions on the collection object
-//    client.close();
-// });
+var firebase = require("firebase");
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +15,12 @@ import swal from 'sweetalert2';
 
 export class MoviesService {
   //private existentMovies: Array<Movie> = new Array();
+  private firebaseDB;
+  public gotDataLocally = true;
 
   private allMovies: Array<Movie> = new Array();
+  private TESTallMovies: Array<Movie> = new Array();
+
 
   private allMoviesWithImg: Array<Movie> = new Array();
   private top5: Array<Movie> = new Array();
@@ -54,7 +50,21 @@ export class MoviesService {
 
   private result;
 
-  constructor(private _http: HttpClient, private http:Http) { }
+  constructor(private _http: HttpClient, private http:Http) {
+    // Initialize Firebase
+    // TODO: Replace with your project's customized code snippet
+    var config = {
+        apiKey: "AIzaSyDidGk8b07SkZ4PF8uoAa5mum4FD4El1Qc",
+        authDomain: "jibaramoviedatabase.firebaseapp.com",
+        databaseURL: "https://jibaramoviedatabase.firebaseio.com",
+        projectId: "jibaramoviedatabase",
+        storageBucket: "jibaramoviedatabase.appspot.com",
+        messagingSenderId: "1003292774172"
+    };
+    firebase.initializeApp(config);
+    this.firebaseDB = firebase.database();
+
+   }
 
   shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex; 
@@ -67,6 +77,57 @@ export class MoviesService {
     }  
     return array;
   }
+
+  //-----------------Firebase HTTP-----------------------------------------//
+  firebasePOST(newMov:Movie){
+    var newPostKey = this.firebaseDB.ref().child('movies').push().key;
+    newMov.id = newPostKey;
+    var updates = {};
+    updates['/movies/' + newPostKey] = newMov;
+
+    this.firebaseDB.ref().update(updates); 
+
+    this.firebaseDB.ref('/movies/'+ newMov.id).once('value').then(function(snapshot) {
+      swal({
+        type: 'success',
+        title: 'The movie has been added!',
+        text: 'Resulting Object:',
+        input: 'textarea',
+        inputValue: JSON.stringify(snapshot.val(),null, "\t"),
+        inputClass: 'small-text'
+      })
+    })
+
+    this.allMovies.push(newMov);
+
+  }
+
+  firebasePut(movie:Movie) {
+    this.firebaseDB.ref('/movies/' + movie.id).set(movie);
+    this.firebaseDB.ref('/movies/'+ movie.id).once('value').then(function(snapshot) {
+      swal({
+        type: 'success',
+        title: 'The movie has been updated!',
+        text: 'Resulting Object:',
+        input: 'textarea',
+        inputValue: JSON.stringify(snapshot.val(),null, "\t"),
+        inputClass: 'small-text'
+      })
+    })
+    
+  }
+
+  firebaseGet(){
+    var userId = firebase.auth().currentUser;
+    var a = this;
+    this.firebaseDB.ref('/movies/').once('value').then(function(snapshot) {
+      a.allMovies = Object.values(snapshot.val());
+      a.fillOtherMovieArr();
+      a.loadedListCompleted = true;
+      a.arraysFilled = true;
+    });    
+  }
+
 
   //---------------GET-------------------------------//
 
@@ -149,10 +210,16 @@ export class MoviesService {
         });
         this.fillOtherMovieArr();
 
-      }, null, ()=> {
-      this.loadedListCompleted = true;
-      this.arraysFilled = true;
-    })
+      }, 
+      (error) => {
+        this.gotDataLocally = false;
+        this.firebaseGet();
+        return error
+      }, 
+      ()=> {
+        this.loadedListCompleted = true;
+        this.arraysFilled = true;
+      })
   }
 
   //------------------- POST and PUT ----------------------------------//
@@ -191,7 +258,7 @@ export class MoviesService {
     this.allMovies.forEach(movie => {
       //Movies with image
       if (movie.images[0]) {
-        if (movie.images[0].length >1)
+        if (movie.images[0].length >3)
         this.allMoviesWithImg.push(movie);
       }
       //movie options

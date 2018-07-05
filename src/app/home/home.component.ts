@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   private initializedTop = 0;
   private initializedAll = 0;
+  private shuffle = 0;
 
   private groceryList = new Array;
 
@@ -25,8 +26,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     //if (this.moviesService.getAllMovies().length < 1)    this.moviesService.httpGetAllMovies();
-    if (this.moviesService.getAllMovies().length <1)  this.moviesService.httpNewGetAllMovies()
-        
+    if (this.moviesService.getAllMovies().length <1) this.moviesService.httpNewGetAllMovies();    
   }
 
   setSelectedMovie(ss:string){
@@ -46,7 +46,13 @@ export class HomeComponent implements OnInit {
         images[i].firstElementChild.setAttribute('src', "../../assets/movie-posters/" + this.allMovsPics[i].images[0]);
       }
     }
-    return this.moviesService.shuffle(this.allMovsPics);
+    if (this.shuffle <3) {
+      this.shuffle++; 
+      return this.moviesService.shuffle(this.allMovsPics);
+    }
+    else {
+      return this.allMovsPics;
+    }
   }
   
   getTop5Movies() {
