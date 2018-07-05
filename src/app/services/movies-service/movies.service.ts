@@ -8,18 +8,6 @@ import {Movie, MovieOption} from './movies'
 import swal from 'sweetalert2';
 var firebase = require("firebase");
 
-
-
-
-// var MongoClient = require('mongodb').MongoClient;
-
-// var uri = "mongodb+srv://nunila:<Alemania18>@mymoviedatabase-xue51.mongodb.net/movies?retryWrites=true";
-// MongoClient.connect(uri, function(err, client) {
-//    const collection = client.db("movies").collection("devices");
-//    // perform actions on the collection object
-//    client.close();
-// });
-
 @Injectable({
   providedIn: 'root'
 })
@@ -28,6 +16,7 @@ var firebase = require("firebase");
 export class MoviesService {
   //private existentMovies: Array<Movie> = new Array();
   private firebaseDB;
+  public gotDataLocally = true;
 
   private allMovies: Array<Movie> = new Array();
   private TESTallMovies: Array<Movie> = new Array();
@@ -91,30 +80,52 @@ export class MoviesService {
 
   //-----------------Firebase HTTP-----------------------------------------//
   firebasePOST(newMov:Movie){
-    var newPostKey = firebase.database().ref().child('movies').push().key;
+    var newPostKey = this.firebaseDB.ref().child('movies').push().key;
     newMov.id = newPostKey;
     var updates = {};
     updates['/movies/' + newPostKey] = newMov;
 
-    firebase.database().ref().update(updates); 
+    this.firebaseDB.ref().update(updates); 
+
+    this.firebaseDB.ref('/movies/'+ newMov.id).once('value').then(function(snapshot) {
+      swal({
+        type: 'success',
+        title: 'The movie has been added!',
+        text: 'Resulting Object:',
+        input: 'textarea',
+        inputValue: JSON.stringify(snapshot.val(),null, "\t"),
+        inputClass: 'small-text'
+      })
+    })
+
+    this.allMovies.push(newMov);
+
   }
 
   firebasePut(movie:Movie) {
-    firebase.database().ref('/movies/' + movie.id).set(movie);
+    this.firebaseDB.ref('/movies/' + movie.id).set(movie);
+    this.firebaseDB.ref('/movies/'+ movie.id).once('value').then(function(snapshot) {
+      swal({
+        type: 'success',
+        title: 'The movie has been updated!',
+        text: 'Resulting Object:',
+        input: 'textarea',
+        inputValue: JSON.stringify(snapshot.val(),null, "\t"),
+        inputClass: 'small-text'
+      })
+    })
+    
   }
 
   firebaseGet(){
     var userId = firebase.auth().currentUser;
     var a = this;
-    firebase.database().ref('/movies/').once('value').then(function(snapshot) {
-      a.TESTallMovies = Object.values(snapshot.val());
-    });
-
-    if(this.TESTallMovies) {
-      this.allMovies = this.TESTallMovies;
-      this.loadedListCompleted = true;
-      this.fillOtherMovieArr();
-    }
+    this.firebaseDB.ref('/movies/').once('value').then(function(snapshot) {
+      a.allMovies = Object.values(snapshot.val());
+      a.fillOtherMovieArr();
+      a.loadedListCompleted = true;
+      a.arraysFilled = true;
+    });    
   }
 
 
@@ -178,7 +189,6 @@ export class MoviesService {
   httpNewGetAllMovies() {   
     this._http.get("/api/allMovies")
       .subscribe(res => {
-        if (res['status'] == 404) return res;
         this.allMovies = res['data'].map(movie => {
           return {
             id: movie._id,
@@ -202,14 +212,14 @@ export class MoviesService {
 
       }, 
       (error) => {
-        console.log(error);
+        this.gotDataLocally = false;
+        this.firebaseGet();
         return error
       }, 
       ()=> {
-        console.log('wp')
-      this.loadedListCompleted = true;
-      this.arraysFilled = true;
-    })
+        this.loadedListCompleted = true;
+        this.arraysFilled = true;
+      })
   }
 
   //------------------- POST and PUT ----------------------------------//
@@ -248,7 +258,7 @@ export class MoviesService {
     this.allMovies.forEach(movie => {
       //Movies with image
       if (movie.images[0]) {
-        if (movie.images[0].length >1)
+        if (movie.images[0].length >3)
         this.allMoviesWithImg.push(movie);
       }
       //movie options

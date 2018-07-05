@@ -19,7 +19,7 @@ export class ModifyDBComponent implements OnInit {
     id: '',
     title: '',
     year: '',
-    genres: [],
+    genres: ["a"],
     runtime: '',
     plot: '',
     originalLanguage: '',
@@ -30,7 +30,7 @@ export class ModifyDBComponent implements OnInit {
     nuniReview: '',
     funFact: '',
     seen: '',
-    images: [],
+    images: ["a"],
   } ;
   constructor(private moviesService: MoviesService) { }
 
@@ -84,13 +84,13 @@ export class ModifyDBComponent implements OnInit {
   //------------------------------//
 
   putMovie(){
-    this.moviesService.httpPutMovie(this.selectedMovie);
+    if (this.moviesService.gotDataLocally)   this.moviesService.httpPutMovie(this.selectedMovie);
+    else  this.moviesService.firebasePut(this.selectedMovie);
   }
 
   postNewMovie(){
-    //$('#wo').show();
-    //this.validateForm(this.newMovie);
-    this.moviesService.httpPostMovie(this.newMovie);
+    if (this.moviesService.gotDataLocally)  this.moviesService.httpPostMovie(this.newMovie);
+    else this.moviesService.firebasePOST(this.newMovie);
   }
 
 }
