@@ -5,14 +5,10 @@
 	color: white;
 	display: flex;
 	flex-direction: column;
-	background-image: url(./../../assets/backgrounds/popcorn1Edit.jpg);
+	background-image: url(./../../assets/backgrounds/popcorn1Tint.jpg);
 	background-attachment: fixed;
-	/* background-color:#e9ecef; */
 }
 
-.carousel-item img {
-    max-height:390px
-}
 /*---------------------------------*/
 
 .big-cont img{

@@ -1,5 +1,6 @@
 .navbar {
-    background-color: #f13c20;
+    background-color: #008f95;
+    /* #DF744A */
     height: 60px !important;
     z-index: 100;
     position: sticky;

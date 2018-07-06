@@ -25,6 +25,7 @@ import { MoviePreviewComponent } from './movie-preview/movie-preview.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { ModifyDBComponent } from './modify-db/modify-db.component';
 import * as fs from "fs";
+import { SignInComponent } from './sign-in/sign-in.component';
 
 declare var require: any;
 
@@ -35,7 +36,8 @@ declare var require: any;
     ToolbarComponent,
     HomeComponent,
     MoviePreviewComponent,
-    ModifyDBComponent
+    ModifyDBComponent,
+    SignInComponent
    
   ],
   imports: [
