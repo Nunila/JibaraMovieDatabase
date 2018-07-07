@@ -1,6 +1,5 @@
-<nav class="navbar navbar-expand-lg shadow p-3 mb-5 flex-container-row">
-  <div class="flex-start flex-container-row">
-
+<nav class="navbar shadow p-3 mb-5 flex-container-row">
+  <div class="flex-start flex-container-row big-screen">
     <div routerLink="/home" class="navbar-brand">Cinéma</div> 
     <ul class="navbar-nav ">
       <li class="nav-item active">
@@ -10,6 +9,12 @@
         <div class="nav-link" routerLink="/modify_DB">Modify DB</div>
       </li>
     </ul>
+  </div>
+
+  <div class="small-screen">
+    <button mat-icon-button routerLink="/search_movies" ><mat-icon>spa</mat-icon></button>
+    <!-- <button mat-icon-button routerLink="/search_movies" ><mat-icon>search</mat-icon></button> -->
+    <button *ngIf="getAccess()" routerLink="/modify_DB" mat-icon-button ><mat-icon>brush</mat-icon></button>
   </div>
     
   <div class="flex-end">

@@ -16,15 +16,30 @@ interface User {
 })
 export class LoginService {
 
+  public firebaseDB;
+
   private USERS: Array<User> = [
-    {email: 'nunimarga@gmail.com', username: 'nunila', password: 'admin'},
-    {email: '', username:'elpapisongo', password:'bestnovioever'},
+    {email: 'nunila.davila@upr.edu', username: 'nunila', password: 'admin'},
+    {email: 'test@mail.com', username:'elpapisongo', password:'bestnovioever'},
     {email: '', username:'familia', password:'familia'}
   ]
   private allowToModify = false;
+   
   
 
-  constructor(private router:Router) { }
+  constructor(private router:Router) { 
+    var config = {
+      apiKey: "AIzaSyDidGk8b07SkZ4PF8uoAa5mum4FD4El1Qc",
+      authDomain: "jibaramoviedatabase.firebaseapp.com",
+      databaseURL: "https://jibaramoviedatabase.firebaseio.com",
+      projectId: "jibaramoviedatabase",
+      storageBucket: "jibaramoviedatabase.appspot.com",
+      messagingSenderId: "1003292774172"
+  };
+    firebase.initializeApp(config);
+    this.firebaseDB = firebase.database();
+
+  }
 
   login(user){
     if (user.username == 'admin') this.allowToModify = true;
@@ -35,20 +50,22 @@ export class LoginService {
       this.allowToModify = false;
     }
 
+    firebase.auth().signInWithEmailAndPassword(user.username, user.password).catch(function(error) {
+      console.log(error);
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
+
     this.router.navigate([`/home`]);
-    // firebase.auth().signInWithEmailAndPassword(user.username, user.password).catch(function(error) {
-    //   console.log(error);
-    //   var errorCode = error.code;
-    //   var errorMessage = error.message;
-    // });
+    
   }
 
   logout(){
-    // firebase.auth().signOut().then(function() {
-    //   console.log('success!!!')
-    // }).catch(function(error) {
-    //   // An error happened.
-    // });
+    firebase.auth().signOut().then(function() {
+      console.log('success!!!')
+    }).catch(function(error) {
+      // An error happened.
+    });
   }
 
   getAccess(){

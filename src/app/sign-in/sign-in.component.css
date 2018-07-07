@@ -9,7 +9,7 @@
     align-items:center; 
 }
 .small-container {
-    width: 50%; 
+    min-width: 50%; 
     min-height: 80%;
     padding: 15px;
     background: rgb(255, 255, 255, 0.9);   

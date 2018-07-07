@@ -4,6 +4,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { map } from "rxjs/operators";
 
 import {Movie, MovieOption} from './movies'
+import {LoginService} from '../login-service/login.service'
 
 import swal from 'sweetalert2';
 var firebase = require("firebase/app");
@@ -56,20 +57,8 @@ export class MoviesService {
 
   private result;
 
-  constructor(private _http: HttpClient, private http:Http) {
-    // Initialize Firebase
-    // TODO: Replace with your project's customized code snippet
-    var config = {
-        apiKey: "AIzaSyDidGk8b07SkZ4PF8uoAa5mum4FD4El1Qc",
-        authDomain: "jibaramoviedatabase.firebaseapp.com",
-        databaseURL: "https://jibaramoviedatabase.firebaseio.com",
-        projectId: "jibaramoviedatabase",
-        storageBucket: "jibaramoviedatabase.appspot.com",
-        messagingSenderId: "1003292774172"
-    };
-    firebase.initializeApp(config);
-    this.firebaseDB = firebase.database();
-
+  constructor(private _http: HttpClient, private http:Http, private loginService:LoginService) {   
+    this.firebaseDB = this.loginService.firebaseDB;
    }
 
   shuffle(array) {
@@ -91,35 +80,54 @@ export class MoviesService {
     var updates = {};
     updates['/movies/' + newPostKey] = newMov;
 
-    this.firebaseDB.ref().update(updates); 
-
-    this.firebaseDB.ref('/movies/'+ newMov.id).once('value').then(function(snapshot) {
-      swal({
-        type: 'success',
-        title: 'The movie has been added!',
-        text: 'Resulting Object:',
-        input: 'textarea',
-        inputValue: JSON.stringify(snapshot.val(),null, "\t"),
-        inputClass: 'small-text'
-      })
-    })
-
-    this.allMovies.push(newMov);
+    this.firebaseDB.ref().update(updates,
+      error => {
+        if (error){
+          swal({
+            type: 'error',
+            title: 'Sorry, you do not have permission to edit the database.',
+          })
+        }
+        else {
+          this.firebaseDB.ref('/movies/'+ newMov.id).once('value').then(function(snapshot) {
+            swal({
+              type: 'success',
+              title: 'The movie has been added!',
+              text: 'Resulting Object:',
+              input: 'textarea',
+              inputValue: JSON.stringify(snapshot.val(),null, "\t"),
+              inputClass: 'small-text'
+            })
+          })
+          this.allMovies.push(newMov);
+        }
+      });
 
   }
 
   firebasePut(movie:Movie) {
-    this.firebaseDB.ref('/movies/' + movie.id).set(movie);
-    this.firebaseDB.ref('/movies/'+ movie.id).once('value').then(function(snapshot) {
-      swal({
-        type: 'success',
-        title: 'The movie has been updated!',
-        text: 'Resulting Object:',
-        input: 'textarea',
-        inputValue: JSON.stringify(snapshot.val(),null, "\t"),
-        inputClass: 'small-text'
-      })
-    })
+    this.firebaseDB.ref('/movies/' + movie.id).set(movie, 
+      error => {
+        if (error){
+          swal({
+            type: 'error',
+            title: 'You do not have permission to edit the database.',
+          })
+        }
+        else {
+          this.firebaseDB.ref('/movies/'+ movie.id).once('value').then(function(snapshot) {
+          swal({
+            type: 'success',
+            title: 'The movie has been updated!',
+            text: 'Resulting Object:',
+            input: 'textarea',
+            inputValue: JSON.stringify(snapshot.val(),null, "\t"),
+            inputClass: 'small-text'
+          })
+        })
+      }
+    });
+    
     
   }
 
