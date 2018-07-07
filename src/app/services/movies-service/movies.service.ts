@@ -6,7 +6,13 @@ import { map } from "rxjs/operators";
 import {Movie, MovieOption} from './movies'
 
 import swal from 'sweetalert2';
-var firebase = require("firebase");
+var firebase = require("firebase/app");
+
+require("firebase/auth");
+require("firebase/database");
+// require("firebase/firestore");
+// require("firebase/messaging");
+// require("firebase/functions");
 
 @Injectable({
   providedIn: 'root'
