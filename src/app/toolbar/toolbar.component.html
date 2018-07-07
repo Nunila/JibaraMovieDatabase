@@ -1,22 +1,33 @@
-<nav class="navbar navbar-expand-lg shadow p-3 mb-5 ">
-    <div routerLink="/home" class="navbar-brand">Cinéma</div>
+<nav class="navbar shadow p-3 mb-5 flex-container-row">
+  <div class="flex-start flex-container-row big-screen">
+    <div routerLink="/home" class="navbar-brand">Cinéma</div> 
+    <ul class="navbar-nav ">
+      <li class="nav-item active">
+        <div class="nav-link" routerLink="/search_movies">Search</div>
+      </li>
+      <li *ngIf="getAccess()" class="nav-item">
+        <div class="nav-link" routerLink="/modify_DB">Modify DB</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="small-screen">
+    <button mat-icon-button routerLink="/search_movies" ><mat-icon>spa</mat-icon></button>
+    <!-- <button mat-icon-button routerLink="/search_movies" ><mat-icon>search</mat-icon></button> -->
+    <button *ngIf="getAccess()" routerLink="/modify_DB" mat-icon-button ><mat-icon>brush</mat-icon></button>
+  </div>
     
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-   
-    <div class="collapse navbar-collapse flex-container-row" id="navbarSupportedContent">     
-      <ul class="navbar-nav flex-start">
-        <li class="nav-item active">
-          <div class="nav-link" routerLink="/search_movies">Search</div>
-        </li>
-        <li class="nav-item">
-          <div class="nav-link" routerLink="/modify_DB">Modify DB</div>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0 flex-end">
+  <div class="flex-end">
+    <button mat-icon-button class="dropdown-toggle" [matMenuTriggerFor]="accountMenu" ><mat-icon>face</mat-icon></button>
+    <mat-menu #accountMenu="matMenu">
+      <button mat-menu-item>Profile</button>
+      <button mat-menu-item (click)="logout()" routerLink="/login">Log out</button>
+    </mat-menu>
+  </div>
+      <!-- <form class="form-inline my-2 my-lg-0 flex-end">
         <input class="form-control mr-sm-2" type="search" placeholder="Quick search" aria-label="Search">
         <button type="button" class="btn btn-outline-light">Search</button>
-      </form>
-    </div>
+        
+
+      </form> -->
 </nav>

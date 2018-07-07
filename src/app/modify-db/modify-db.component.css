@@ -1,37 +1,52 @@
+@media only screen and (min-width: 450px) {
+    .intermediario {
+        width: 60%; 
+        padding: 15px;
+        margin: 5px;
+    }
+
+}
+
+@media only screen and (max-width: 449px) {
+    .intermediario {
+        width: 100%;
+        margin: 5px;
+        padding: 0px; 
+    }
+
+}
 
 .flex-container-column {
-    background-image: url(./../../assets/backgrounds/popcorn1Edit.jpg);
+    /* #DF744A */
+    background-image: url(../../assets/backgrounds/hotint.jpg);
+       /* background-color:#1C1F24; */
+    width: 100% !important;
+    height: 100% !important;
     background-attachment: fixed;
-    margin-top: -70px;
+    margin-top: -75px;
     display: flex;
     flex-direction: column-reverse;   
     justify-content: center;
 }
 .new-movie-cont {
+    color: white;
     padding-top: 10px;
     display: flex;
     justify-content: center;
 }
 
 .modify-cont {
-    padding-top: 10px;
+    color:  white;
+    padding-top: 5px;
     display: flex;
     justify-content: center;
 }
 
-.intermediario {
-    width: 60%; 
-    padding: 15px;
-    /* background: rgb(255, 255, 255, 0.9); */
-    margin: 5px;
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);   */
+.new-movie-cont .header {
+    border-bottom: 2px #DF744A dashed;
 }
-
-/* .modify-cont .intermediario {
-    border-bottom: 3px black double;
-} */
-.header {
-    border-bottom: 2px black dashed;
+.modify-cont .header {
+    border-bottom: 2px #E24E42 dashed;
 }
 
 /*----------------------------------------*/
@@ -40,7 +55,7 @@ h2 {
 }
 
 .form-group label {
-    font-family: 'Titan One';
+    font-family: 'Lobster';
 }
 
 .new-mov {
@@ -49,26 +64,23 @@ h2 {
     border-radius: 0; 
     font-family: 'Titan One'; 
     font-size: 2rem;
-    background-color: #f13c20; 
+    background-color: #e9b000; 
     color: white; 
-    border: #f13c20;
+    border: #e9b000;
 }
 
 input {
     border-radius: 0%;
     border-color: transparent;
-    /* background-color: rgba(254, 69, 30, 0.15) */
 }
 
 select {
     border-radius: 0%;
     border-color: transparent;
-    /* background-color: rgba(254, 69, 30, 0.15) */
 }
 
 textarea {
     border-radius: 0%;    
     border-color: transparent;
-    /* background-color: rgba(254, 69, 30, 0.15) */
 }
 

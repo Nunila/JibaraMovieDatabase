@@ -1,11 +1,13 @@
+<app-toolbar></app-toolbar>
+
 <div class="home-container"> 
   
-  <!-- <div class="big-cont">
-    <!-- <button id="modifyDB" mat-raised-button><h3>Click me!</h3></button>
-    <img src="../../assets/movie-posters/shutter island hor.jpg" alt="shutterIsland" class="image" style="width:100%">
+  <!-- <div class="welcome text-center">
+    <h1 class="animated rubberBand">Movie Nights' Best Friend</h1>
+    <h6>Jibara Movie Database's purpose is to make those Movie Night's movie selection time less hectic. Enjoy!</h6>
   </div> -->
-
-  <div *ngIf=moviesService.loadedListCompleted class="grid all-cont" >
+  
+  <div class="grid all-cont" *ngIf=moviesService.loadedListCompleted >
 
     <figure *ngFor="let movie of getAllMovWithImg()" class="effect-sadie all-movs">
       <img alt="{{movie.title}}"/>

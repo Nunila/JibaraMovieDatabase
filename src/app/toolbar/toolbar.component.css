@@ -1,5 +1,24 @@
+@media only screen and (min-width: 450px) {
+    .big-screen {
+        display: flex;
+    }
+    .small-screen {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 449px) {
+    .big-screen {
+        display: none !important;
+    }
+    .small-screen{
+        display: flex;
+    }
+}
+
 .navbar {
-    background-color: #f13c20;
+    background-color: #008f95;
+    /* #DF744A */
     height: 60px !important;
     z-index: 100;
     position: sticky;
@@ -31,3 +50,8 @@
 .nav-link {
     cursor: pointer;
 }
+
+mat-menu {
+    font-family: 'Pacifico',cursive;
+}
+
