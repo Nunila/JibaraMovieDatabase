@@ -1,32 +1,25 @@
 
 .home-container {
 	margin-top: -50px;
-	height: 100%;
+	width: 100%;  
+    min-height: 100vh;
 	color: white;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	background-image: url(./../../assets/backgrounds/popcorn1Tint.jpg);
 	background-attachment: fixed;
 }
 
-/*---------------------------------*/
-
-.big-cont img{
-	height:420px;
-}
-
-#modifyDB {	
-	position: absolute;
-	top:200px;
-	left: 100px;
-	font-family: 'Krona One', sans-serif;
-}
-
-
-
-/*---------------------------------*/
-figcaption {
-	font-family: 'Krona One', sans-serif;
+.welcome {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-family: 'Titan One';
+	margin: 10px;
+	width: 80%;
+	background-color: #e20e4270;
 }
 
 .all-cont {
@@ -38,6 +31,10 @@ figcaption {
 	/* background-color: #e9ecef; */
 	text-align: center;
 
+}
+/*---------------------------------*/
+figcaption {
+	font-family: 'Krona One', sans-serif;
 }
 
 /* Common style */
