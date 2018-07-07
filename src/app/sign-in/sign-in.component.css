@@ -1,0 +1,37 @@
+
+.big-container {
+    background-image: url(../../assets/backgrounds/popcornOrange.jpg);
+    width: 100%;  
+    min-height: 100vh;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items:center; 
+}
+.small-container {
+    width: 50%; 
+    min-height: 80%;
+    padding: 15px;
+    background: rgb(255, 255, 255, 0.9);   
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.login-form {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.new-mov {
+    width: 120px;
+    height: 60px;
+    border-radius: 0; 
+    font-family: 'Titan One'; 
+    font-size: 2rem;
+    background-color: #f13c20; 
+    color: white; 
+    border: #f13c20;
+}

@@ -1,3 +1,31 @@
-<p>
-  sign-in works!
-</p>
+
+<div class="big-container">
+
+  <div class="small-container text-center">
+
+    <div class="login-form">
+      <h1 style="font-family: 'Titan One';">Welcome!</h1>
+      <h6>Please login to continue.</h6>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="email">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </mat-form-field>
+
+      <h6>If you do not have an account, please click <a routerLink="/home" href="#">Continue as a guest.</a></h6>
+      <br>
+      <div style="display: flex; justify-content: center;">
+        <button routerLink="/home" class="btn new-mov" type="submit" >Login</button>
+        <br>
+      </div>
+    </div>
+    
+  </div>
+
+
+</div>
