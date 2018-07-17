@@ -84,3 +84,12 @@ textarea {
     border-color: transparent;
 }
 
+#addnewimage {
+    font-family:'Titan One';
+    background-color: #e9b000; 
+    color: white; 
+    border-color: transparent;
+    border-radius: 0; 
+
+}
+

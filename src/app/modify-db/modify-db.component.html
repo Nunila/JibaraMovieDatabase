@@ -11,7 +11,7 @@
         <h2 class="text-center">Add New Movie</h2> 
       </div>
       
-      <form class="needs-validation" novalidate>
+      <form id="new-form" class="needs-validation" novalidate>
         <div class="form-row">
           <div class="form-group col-md-10">
             <label for="inputTitle">Title</label>
@@ -107,9 +107,16 @@
         <!-- <div class="form-group">
           <label>Upload images of the movie.</label>
         </div> -->
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" id="validatedCustomFile" multiple>
-          <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+        <div class="form-group">
+          <label for="inputchip">Images (links)</label>
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let img of newMovie.images; let i = index" >{{img}}<mat-icon (click)="remove( i, 'new')" matChipRemove>cancel</mat-icon></mat-chip>
+          </mat-chip-list>
+          <hr>
+          <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="newImage" (keyup)=checkKey($event) name="newimages" placeholder="Link of image">
+          </div>
+          
         </div>
         <div class="form-group">
           <div class="form-check">
@@ -118,7 +125,7 @@
           </div>
         </div>
         <div style="display: flex; justify-content: center;">
-          <button class="btn new-mov" (click)="postNewMovie()" type="submit" >Save!</button>
+          <button class="btn new-mov" (click)="postNewMovie()" >Save!</button>
         </div>
       </form>
     </div>
@@ -137,7 +144,8 @@
           </select>
         </div>
         
-      <form *ngIf="selectedMovieId" class="needs-validation" novalidate>
+      <form  id="mod-form" class="needs-validation" novalidate>
+        <div *ngIf="selectedMovieId">
           <div class="form-row">
             <div class="form-group col-md-10">
               <label for="inputTitle">Title</label>
@@ -230,13 +238,17 @@
               <textarea [(ngModel)]="selectedMovie.nuniReview" name="nunirev"rows="1" class="form-control" id="inputZip" placeholder="Nuni's review if seen."></textarea>
             </div>
           </div>     
-          <!-- <div class="form-group">
-            <label>Upload images of the movie.</label>
-          </div> -->
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" id="validatedCustomFile" multiple>
-            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-          </div>
+          <div class="form-group">
+              <label for="inputchip">Images (links)</label>
+              <mat-chip-list #chipList>
+                <mat-chip *ngFor="let img of selectedMovie.images; let i = index" >{{img}}<mat-icon (click)="remove( i)" matChipRemove>cancel</mat-icon></mat-chip>
+              </mat-chip-list>
+              <hr>
+              <div class="input-group">
+                <input type="text" class="form-control" [(ngModel)]="newImage" (keyup)=checkKey($event) name="modimages" placeholder="Link of image">
+              </div>
+              
+            </div>
           <div class="form-group">
             <div class="form-check">
               <input [(ngModel)]="selectedMovie.seen" name="seen"class="form-check-input" type="checkbox" id="gridCheck">
@@ -244,9 +256,10 @@
             </div>
           </div>
           <div style="display: flex; justify-content: center;">
-            <button class="btn new-mov" (click)="putMovie()" type="submit" >Save!</button>
+            <button class="btn new-mov" (click)="putMovie()" >Save!</button>
           </div>
-        </form>
+        </div>
+      </form>
     </div>   
   </div>
 

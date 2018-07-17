@@ -15,6 +15,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatChipsModule} from '@angular/material/chips';
 
 import { MoviesService } from './services/movies-service/movies.service'
 import { SearchMoviesComponent } from './search-movies/search-movies.component';
@@ -51,6 +52,7 @@ declare var require: any;
     MatFormFieldModule,
     MatInputModule,
     MatMenuModule,
+    MatChipsModule,
 
 
     AppRoutingModule

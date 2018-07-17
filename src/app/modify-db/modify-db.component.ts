@@ -30,8 +30,10 @@ export class ModifyDBComponent implements OnInit {
     nuniReview: '',
     funFact: '',
     seen: '',
-    images: ["a"],
+    images: [""],
   } ;
+
+  private newImage = '';
   constructor(private moviesService: MoviesService) { }
 
   ngOnInit() {
@@ -39,6 +41,12 @@ export class ModifyDBComponent implements OnInit {
 
     this.selectedMovie = this.moviesService.getMovieById(this.selectedMovieId);
     this.setValidate();
+    document.getElementById("new-form").onkeypress = function(e) {
+      var key = e.charCode || e.keyCode || 0;     
+      if (key == 13) {
+        e.preventDefault();
+      }
+    }
   }
 
   getMovOpt(){
@@ -48,6 +56,31 @@ export class ModifyDBComponent implements OnInit {
   setSelectedMovie(){
     this.selectedMovie = this.moviesService.getMovieById(this.selectedMovieId);
     this.setValidate();
+    document.getElementById("mod-form").onkeypress = function(e) {
+      var key = e.charCode || e.keyCode || 0;     
+      if (key == 13) {
+        e.preventDefault();
+      }
+    }
+  }
+
+  checkKey(e){
+    if (e.key == "Enter")  this.add(e);
+  }
+
+  add(e): void {
+    if (e) {
+      if (e.target.name == 'newimages' || false)     this.newMovie.images.push(this.newImage);
+      else this.selectedMovie.images.push(this.newImage);
+    }
+
+    this.newImage = '';
+  }
+
+  remove(i, which): void {
+     if (which == 'new')  this.newMovie.images.splice(i,1);
+     else this.selectedMovie.images.splice(i,1);
+
   }
 
   setValidate(){
@@ -84,11 +117,14 @@ export class ModifyDBComponent implements OnInit {
   //------------------------------//
 
   putMovie(){
+    console.log('wo')
     if (this.moviesService.gotDataLocally)   this.moviesService.httpPutMovie(this.selectedMovie);
     else  this.moviesService.firebasePut(this.selectedMovie);
   }
 
-  postNewMovie(){
+  postNewMovie(e){
+
+    console.log(e)
     if (this.moviesService.gotDataLocally)  this.moviesService.httpPostMovie(this.newMovie);
     else this.moviesService.firebasePOST(this.newMovie);
   }
