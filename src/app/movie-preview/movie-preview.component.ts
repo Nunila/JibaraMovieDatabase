@@ -21,13 +21,13 @@ export class MoviePreviewComponent implements OnInit {
     for(var i=0;i< each.length;i+=2){
       this.cast.push(each[i]+ " " + each[i+1]);
     }
-    document.getElementsByClassName('movie-poster')[0].firstElementChild.setAttribute('src', "../../assets/movie-posters/" + this.selectedMovie.images[0])
+    document.getElementsByClassName('movie-poster')[0].firstElementChild.setAttribute('src',this.selectedMovie.images[0])
 
     const movieMedia = document.getElementsByClassName('movie-media')[0];
     this.selectedMovie.images.forEach((image, i)=> {
       if(i> 0 && i<3){
         var im = document.createElement("img");
-        im.src = "../../assets/movie-posters/" + this.selectedMovie.images[i];
+        im.src = this.selectedMovie.images[i];
         im.style.maxWidth = '100%';
         im.style.margin = '5px'
         movieMedia.appendChild(im);

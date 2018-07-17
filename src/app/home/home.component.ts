@@ -43,10 +43,10 @@ export class HomeComponent implements OnInit {
       this.initializedAll = 2;
       var images = document.getElementsByClassName('all-movs');
       for(var i=0;i<images.length;i++){
-        images[i].firstElementChild.setAttribute('src', "../../assets/movie-posters/" + this.allMovsPics[i].images[0]);
+        images[i].firstElementChild.setAttribute('src', this.allMovsPics[i].images[0]);
       }
     }
-    if (this.shuffle <3) {
+    if (this.shuffle <2) {
       this.shuffle++; 
       return this.moviesService.shuffle(this.allMovsPics);
     }

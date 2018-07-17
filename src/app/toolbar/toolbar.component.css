@@ -16,6 +16,7 @@
     }
 }
 
+
 .navbar {
     background-color: #008f95;
     /* #DF744A */
@@ -51,7 +52,11 @@
     cursor: pointer;
 }
 
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+}
+
 mat-menu {
     font-family: 'Pacifico',cursive;
 }
-

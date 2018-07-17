@@ -1,12 +1,12 @@
 <nav class="navbar shadow p-3 mb-5 flex-container-row">
   <div class="flex-start flex-container-row big-screen">
-    <div routerLink="/home" class="navbar-brand">Cinéma</div> 
+    <div routerLink="/home" class="navbar-brand">JíbaraMovies</div> 
     <ul class="navbar-nav ">
       <li class="nav-item active">
         <div class="nav-link" routerLink="/search_movies">Search</div>
       </li>
-      <li *ngIf="getAccess()" class="nav-item">
-        <div class="nav-link" routerLink="/modify_DB">Modify DB</div>
+      <li *ngIf="getAccess()" style="margin-left: 10px;" class="nav-item">
+        <div class="nav-link" routerLink="/modify_DB">ModifyDb</div>
       </li>
     </ul>
   </div>
