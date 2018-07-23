@@ -110,7 +110,7 @@
         <div class="form-group">
           <label for="inputchip">Images (links)</label>
           <mat-chip-list #chipList>
-            <mat-chip *ngFor="let img of newMovie.images; let i = index" >{{img}}<mat-icon (click)="remove( i, 'new')" matChipRemove>cancel</mat-icon></mat-chip>
+            <div *ngFor="let img of newMovie.images; let i = index"><img class="preview" src={{img}} alt='No Image added.'><mat-icon (click)="remove(i, 'new')" >cancel</mat-icon></div>
           </mat-chip-list>
           <hr>
           <div class="input-group">
@@ -241,7 +241,7 @@
           <div class="form-group">
               <label for="inputchip">Images (links)</label>
               <mat-chip-list #chipList>
-                <mat-chip *ngFor="let img of selectedMovie.images; let i = index" >{{img}}<mat-icon (click)="remove( i)" matChipRemove>cancel</mat-icon></mat-chip>
+                <div *ngFor="let img of selectedMovie.images; let i = index"><img class="preview" src={{img}} alt='not an actual link'><mat-icon (click)="remove(i)" >cancel</mat-icon></div>
               </mat-chip-list>
               <hr>
               <div class="input-group">

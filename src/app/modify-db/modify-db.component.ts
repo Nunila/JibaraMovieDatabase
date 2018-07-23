@@ -73,7 +73,6 @@ export class ModifyDBComponent implements OnInit {
       if (e.target.name == 'newimages' || false)     this.newMovie.images.push(this.newImage);
       else this.selectedMovie.images.push(this.newImage);
     }
-
     this.newImage = '';
   }
 
@@ -104,7 +103,6 @@ export class ModifyDBComponent implements OnInit {
 
   validateForm(obj: Movie){
     var mess:string = "";
-
     Object.entries(obj).forEach((entry, i) => {
       if (i<11) {
         if (entry[1].length < 1){
@@ -115,7 +113,6 @@ export class ModifyDBComponent implements OnInit {
     return mess;
   }
   //------------------------------//
-
   putMovie(){
     console.log('wo')
     if (this.moviesService.gotDataLocally)   this.moviesService.httpPutMovie(this.selectedMovie);

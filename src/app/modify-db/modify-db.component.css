@@ -90,6 +90,11 @@ textarea {
     color: white; 
     border-color: transparent;
     border-radius: 0; 
-
 }
 
+.preview {
+    max-width: 230px;
+    max-height: 230px;
+    border: 10px solid rgba(255, 255, 255, 0.836);
+    margin: 5px;
+}

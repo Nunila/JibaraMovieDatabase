@@ -128,6 +128,7 @@ export class MoviesService {
       }
     });
     
+    this.fillOtherMovieArr();
     
   }
 
@@ -269,6 +270,8 @@ export class MoviesService {
   }
   //---------------------------------------//
   fillOtherMovieArr(){
+    this.allMoviesWithImg= new Array();
+    this.movieOptions = new Array();
     this.allMovies.forEach(movie => {
       //Movies with image
       if (movie.images[0]) {
@@ -277,8 +280,13 @@ export class MoviesService {
       }
       //movie options
       this.movieOptions.push({value: movie.id, text: movie.title});
-
     });
+    var sorted = this.movieOptions.sort((a,b) => {
+      if (a.text > b.text)  return 1;
+      if (a.text < b.text)  return -1;
+      return 0;
+    })
+    this.movieOptions = sorted;
   }
 
   setSelectedMovie(newId:string){
