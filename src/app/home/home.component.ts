@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MoviesService} from '../services/movies-service/movies.service'
-import {Movie} from '../services/movies-service/movies'
+import {Movie, movieSchema} from '../services/movies-service/movies'
 
 
 @Component({
@@ -11,9 +11,7 @@ import {Movie} from '../services/movies-service/movies'
 export class HomeComponent implements OnInit {
 
   users: Array<any>;
-
-  private top5Movies: Array<Movie> = new Array(5);
-  private allMovsPics: Array<Movie> = new Array();
+  private allMovsPics: Array<movieSchema> = new Array();
 
   private initializedTop = 0;
   private initializedAll = 0;
@@ -54,21 +52,4 @@ export class HomeComponent implements OnInit {
       return this.allMovsPics;
     }
   }
-  
-  getTop5Movies() {
-    if (this.initializedTop ==0) {
-      this.top5Movies = this.moviesService.getTop5Movies();
-      this.initializedTop = 1
-      return this.top5Movies;
-    }
-    if (this.initializedTop == 1){
-      this.initializedTop = 2;
-      var images = document.getElementsByClassName('top-mov');
-      for(var i=0;i<images.length;i++){
-        images[i].firstElementChild.setAttribute('src', "../../assets/movie-posters/" + this.top5Movies[i].images[1]);
-      }
-    }
-    return this.top5Movies
-  }
-
 }

@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http'
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { map } from "rxjs/operators";
 
-import {Movie, MovieOption} from './movies'
+import {Movie, movieSchema, MovieOption} from './movies'
 import {LoginService} from '../login-service/login.service'
 
 import swal from 'sweetalert2';
@@ -25,15 +25,14 @@ export class MoviesService {
   private firebaseDB;
   public gotDataLocally = true;
 
-  private allMovies: Array<Movie> = new Array();
-  private TESTallMovies: Array<Movie> = new Array();
+  private oldMovies: Array<Movie> = new Array();
+  private newAllMovies: Array<movieSchema> = new Array();
 
-
-  private allMoviesWithImg: Array<Movie> = new Array();
+  private allMoviesWithImg: Array<movieSchema> = new Array();
   private top5: Array<Movie> = new Array();
 
   private movieOptions: Array<MovieOption> = new Array();
-  public selectedMovie: Movie;
+  public selectedMovie: movieSchema;
   private modelPostPut = {
     id: null,
     title: null,
@@ -74,7 +73,7 @@ export class MoviesService {
   }
 
   //-----------------Firebase HTTP-----------------------------------------//
-  firebasePOST(newMov:Movie){
+  firebasePOST(newMov:movieSchema){
     var newPostKey = this.firebaseDB.ref().child('movies').push().key;
     newMov.id = newPostKey;
     var updates = {};
@@ -99,13 +98,13 @@ export class MoviesService {
               inputClass: 'small-text'
             })
           })
-          this.allMovies.push(newMov);
+          this.newAllMovies.push(newMov);
         }
       });
 
   }
 
-  firebasePut(movie:Movie) {
+  firebasePut(movie:movieSchema) {
     this.firebaseDB.ref('/movies/' + movie.id).set(movie, 
       error => {
         if (error){
@@ -126,17 +125,21 @@ export class MoviesService {
           })
         })
       }
-    });
-    
-    this.fillOtherMovieArr();
-    
+    });   
+    this.fillOtherMovieArr();   
+  }
+
+  ONETIME(){
+    this.newAllMovies.forEach(mov => {
+      this.firebaseDB.ref('/movies/' + mov.id).set(mov)
+    })
   }
 
   firebaseGet(){
     var userId = firebase.auth().currentUser;
     var a = this;
     this.firebaseDB.ref('/movies/').once('value').then(function(snapshot) {
-      a.allMovies = Object.values(snapshot.val());
+      a.newAllMovies = Object.values(snapshot.val());
       a.fillOtherMovieArr();
       a.loadedListCompleted = true;
       a.arraysFilled = true;
@@ -204,7 +207,7 @@ export class MoviesService {
   httpNewGetAllMovies() {   
     this._http.get("/api/allMovies")
       .subscribe(res => {
-        this.allMovies = res['data'].map(movie => {
+        this.oldMovies = res['data'].map(movie => {
           return {
             id: movie._id,
             title: movie.title,
@@ -223,6 +226,7 @@ export class MoviesService {
             images: movie.images, 
           }
         });
+        
         this.fillOtherMovieArr();
 
       }, 
@@ -239,18 +243,18 @@ export class MoviesService {
 
   //------------------- POST and PUT ----------------------------------//
 
-  httpPostMovie(newmov:Movie) {   
+  httpPostMovie(newmov:movieSchema) {   
     this.http.post("/api/postMovie", newmov).subscribe(res => {
       var json = res.json()
       console.log(json);
       if (json.status == 200) {
-        this.allMovies.push(newmov);
+        this.newAllMovies.push(newmov);
       }
       else alert(res.json());
     });
   }
 
-  httpPutMovie(modMovie:Movie) {
+  httpPutMovie(modMovie:movieSchema) {
     this.http.put("/api/modifyExistentMovie/:id", modMovie).subscribe(res => {
       var json = res.json()
       console.log(json);
@@ -272,7 +276,7 @@ export class MoviesService {
   fillOtherMovieArr(){
     this.allMoviesWithImg= new Array();
     this.movieOptions = new Array();
-    this.allMovies.forEach(movie => {
+    this.newAllMovies.forEach(movie => {
       //Movies with image
       if (movie.images[0]) {
         if (movie.images[0].length >3)
@@ -293,35 +297,21 @@ export class MoviesService {
     this.selectedMovie = this.getMovieById(newId);
   }
 
-  getDeterminedPicture(movId: string, allignment:string){
-
-  }
-
   //---------------Custom lists---------------------//
 
   getAllMovies(){
-    return this.allMovies
+    return this.newAllMovies
   }
 
   getMovieById(lookupId){    
-    var r =  this.allMovies.find(function(movie){
+    var r =  this.newAllMovies.find(function(movie){
       return movie.id == lookupId;
     });
     return r;
-  }
-  
-  getTop5Movies(){
-    if (this.allMovies) {
-      var top1 = this.getMovieById('1000'), //Get out
-    top2 = this.getMovieById('1029'), //The one i love
-    top3 = this.getMovieById('1050'), //django
-    top4 =this.getMovieById('1009') //Balck Swan
-    //top5 =this.getMovieById('1006'); //Gone Girl
-
-    this.top5 = [top1, top2, top3,  top4];
-    return this.top5;
-    }
-    else return;  
+    // var r =  this.allMovies.find(function(movie){
+    //   return movie.id == lookupId;
+    // });
+    // return r;
   }
 
   getAllMoviesWithImg() {

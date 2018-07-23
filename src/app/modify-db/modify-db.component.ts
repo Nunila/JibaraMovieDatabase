@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../services/movies-service/movies.service'
-import { Movie } from '../services/movies-service/movies'
+import { Movie, movieSchema } from '../services/movies-service/movies'
 
 import * as $ from 'jquery';
 import swal from 'sweetalert2';
@@ -14,19 +14,20 @@ import swal from 'sweetalert2';
 export class ModifyDBComponent implements OnInit {
 
   private selectedMovieId: string;
-  private selectedMovie: Movie;
-  private newMovie: Movie =   {
+  private selectedMovie: movieSchema;
+  private newMovie: movieSchema =   {
     id: '',
     title: '',
     year: '',
-    genres: ["a"],
+    genres: [""],
     runtime: '',
     plot: '',
     originalLanguage: '',
     director: '',
-    writer: '',
-    mainCast: '',
+    writer: [''],
+    mainCast: [''],
     rating: '',
+    consensus: '',
     nuniReview: '',
     funFact: '',
     seen: '',

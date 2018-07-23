@@ -90,14 +90,14 @@
         <div class="form-row">
           <div class="form-group col-md-2">
             <label for="inputState">RT %</label>
-            <input type="number" required class="form-control" placeholder="%%">
+            <input type="text" [(ngModel)]="newMovie.rating" name=rating required class="form-control" placeholder="%%">
             <div class="invalid-feedback">
                 Please provide a value.
               </div>
           </div>
           <div class="form-group col-md-5">
             <label for="inputZip">Consensus</label>
-            <textarea [(ngModel)]="newMovie.rating" name="rat"rows="1" class="form-control" id="inputZip" placeholder="Rotten Tomatoes Consensus"></textarea>
+            <textarea [(ngModel)]="newMovie.consensus" name="consensus" rows="1" class="form-control" id="inputZip" placeholder="Rotten Tomatoes Consensus"></textarea>
           </div>
           <div class="form-group col-md-5">
             <label for="inputZip">Nuni's Review</label>
@@ -224,14 +224,14 @@
           <div class="form-row">
             <div class="form-group col-md-2">
               <label for="inputState">RT %</label>
-              <input type="number" required class="form-control" placeholder="%%">
+              <input type="text" [(ngModel)]="selectedMovie.rating" name="rating" required class="form-control" placeholder="%%">
               <div class="invalid-feedback">
                   Please provide a value.
                 </div>
             </div>
             <div class="form-group col-md-5">
               <label for="inputZip">Consensus</label>
-              <textarea [(ngModel)]="selectedMovie.rating" name="rat"rows="1" class="form-control" id="inputZip" placeholder="Rotten Tomatoes Consensus"></textarea>
+              <textarea [(ngModel)]="selectedMovie.consensus" name="consensus" rows="1" class="form-control" id="inputZip" placeholder="Rotten Tomatoes Consensus"></textarea>
             </div>
             <div class="form-group col-md-5">
               <label for="inputZip">Nuni's Review</label>
