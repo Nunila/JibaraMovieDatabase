@@ -54,7 +54,7 @@ export class MoviesService {
   public loadedListCompleted = false;
   public arraysFilled = false;
 
-  private result;
+  private searchResults: Array<movieSchema> = new Array();
 
   constructor(private _http: HttpClient, private http:Http, private loginService:LoginService) {   
     this.firebaseDB = this.loginService.firebaseDB;
@@ -322,5 +322,38 @@ export class MoviesService {
     return this.movieOptions;
   }
 
+//---------------SEARCH-------------------------------//
+
+  search(filters){
+    var results: Array<movieSchema> = new Array();
+    console.log(filters)
+    switch (filters.whichKey) {
+
+      case 'title':
+      this.newAllMovies.forEach(mov => {
+        if (mov.title.toLowerCase().search(filters.keyword.toLowerCase()) != -1) results.push(mov);
+      });
+      break;
+      case 'director':
+      this.newAllMovies.forEach(mov => {
+        if (mov.director.toLowerCase().search(filters.keyword.toLowerCase()) != -1) results.push(mov);
+      });
+      break;
+      case 'plot':
+      this.newAllMovies.forEach(mov => {
+        if (mov.plot.toLowerCase().search(filters.keyword.toLowerCase()) != -1) results.push(mov);
+      }) ;
+      break;
+      case 'cast':
+      this.newAllMovies.forEach(mov => {
+        mov.mainCast.forEach(cast => {
+          if (cast.toLowerCase().search(filters.keyword.toLowerCase()) != -1) results.push(mov);
+        });
+      });
+      break;
+    }
+
+    console.log(results);
+  }
 
 }

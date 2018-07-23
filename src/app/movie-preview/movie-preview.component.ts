@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MoviesService} from '../services/movies-service/movies.service'
-import {Movie} from '../services/movies-service/movies'
+import {Movie, movieSchema} from '../services/movies-service/movies'
 
 @Component({
   selector: 'app-movie-preview',
@@ -11,16 +11,10 @@ export class MoviePreviewComponent implements OnInit {
 
   constructor(private moviesService: MoviesService) { }
 
-  private selectedMovie: Movie;
-  private cast: string[] = new Array();
+  private selectedMovie: movieSchema;
 
   ngOnInit() {
     this.selectedMovie = this.moviesService.selectedMovie;
-
-    var each = this.selectedMovie.mainCast.split(' ');
-    for(var i=0;i< each.length;i+=2){
-      this.cast.push(each[i]+ " " + each[i+1]);
-    }
     document.getElementsByClassName('movie-poster')[0].firstElementChild.setAttribute('src',this.selectedMovie.images[0])
 
     const movieMedia = document.getElementsByClassName('movie-media')[0];
