@@ -114,15 +114,23 @@ export class ModifyDBComponent implements OnInit {
     return mess;
   }
   //------------------------------//
+
+  manageStringToArray(value) {
+    if (value.constructor != Array) {
+      return value.split(',');
+    }
+    return value;
+  }
   putMovie(){
-    console.log('wo')
+    this.selectedMovie.genres = this.manageStringToArray(this.selectedMovie.genres);
+    this.selectedMovie.mainCast = this.manageStringToArray(this.selectedMovie.mainCast);
+    this.selectedMovie.writer = this.manageStringToArray(this.selectedMovie.writer);
+
     if (this.moviesService.gotDataLocally)   this.moviesService.httpPutMovie(this.selectedMovie);
     else  this.moviesService.firebasePut(this.selectedMovie);
   }
 
-  postNewMovie(e){
-
-    console.log(e)
+  postNewMovie(){
     if (this.moviesService.gotDataLocally)  this.moviesService.httpPostMovie(this.newMovie);
     else this.moviesService.firebasePOST(this.newMovie);
   }
