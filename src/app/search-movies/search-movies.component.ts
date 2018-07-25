@@ -29,11 +29,13 @@ export class SearchMoviesComponent implements OnInit {
   }
 
   getResults(){
-    return [this.getAllMovies()[0]]
+    return this.results;
   }
 
   checkKey(e){
-    if (e.key == "Enter")  this.moviesService.search(this.searchForm);
+    if (e.key == "Enter")  {
+      this.results = this.moviesService.search(this.searchForm);
+  
+    }
   }
-
 }

@@ -88,12 +88,15 @@
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group col-md-2">
+          <div class="form-group col-md-2 input-group">
             <label for="inputState">RT %</label>
-            <input type="text" [(ngModel)]="newMovie.rating" name=rating required class="form-control" placeholder="%%">
-            <div class="invalid-feedback">
-                Please provide a value.
+            <div class="input-group mb-3">
+              <input type="number" [(ngModel)]="newMovie.rating" name="rating" required class="form-control" placeholder="%%">
+              <div class="invalid-feedback">Please provide a value.</div>
+              <div class="input-group-append no-round top-b">
+                <span class="input-group-text no-round" id="basic-addon2"><b>%</b></span>
               </div>
+            </div>
           </div>
           <div class="form-group col-md-5">
             <label for="inputZip">Consensus</label>
@@ -222,12 +225,15 @@
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-2 input-group">
               <label for="inputState">RT %</label>
-              <input type="text" [(ngModel)]="selectedMovie.rating" name="rating" required class="form-control" placeholder="%%">
-              <div class="invalid-feedback">
-                  Please provide a value.
+              <div class="input-group mb-3">
+                <input type="number" [(ngModel)]="selectedMovie.rating" name="rating" required class="form-control" placeholder="%%">
+                <div class="invalid-feedback">Please provide a value.</div>
+                <div class="input-group-append no-round top-b">
+                  <span class="input-group-text no-round" id="basic-addon2"><b>%</b></span>
                 </div>
+              </div>            
             </div>
             <div class="form-group col-md-5">
               <label for="inputZip">Consensus</label>

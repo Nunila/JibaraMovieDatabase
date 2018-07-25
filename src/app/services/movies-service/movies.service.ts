@@ -25,7 +25,6 @@ export class MoviesService {
   private firebaseDB;
   public gotDataLocally = true;
 
-  private oldMovies: Array<Movie> = new Array();
   private newAllMovies: Array<movieSchema> = new Array();
 
   private allMoviesWithImg: Array<movieSchema> = new Array();
@@ -53,8 +52,6 @@ export class MoviesService {
 
   public loadedListCompleted = false;
   public arraysFilled = false;
-
-  private searchResults: Array<movieSchema> = new Array();
 
   constructor(private _http: HttpClient, private http:Http, private loginService:LoginService) {   
     this.firebaseDB = this.loginService.firebaseDB;
@@ -207,7 +204,7 @@ export class MoviesService {
   httpNewGetAllMovies() {   
     this._http.get("/api/allMovies")
       .subscribe(res => {
-        this.oldMovies = res['data'].map(movie => {
+        this.newAllMovies = res['data'].map(movie => {
           return {
             id: movie._id,
             title: movie.title,
@@ -326,34 +323,94 @@ export class MoviesService {
 
   search(filters){
     var results: Array<movieSchema> = new Array();
-    console.log(filters)
+
+    if (filters.keyword && filters.min || filters.keyword && filters.max || filters.keyword && filters.max && filters.min){
+      var  filtered: Array<movieSchema> = this.searchKey(filters, results);
+
+      switch(filters.whichRange) {
+        case 'year':
+        filtered.forEach((mov, i, arr) => {
+          var min = filters.min ? filters.min : 1888
+          var max = filters.max ? filters.max : 2030
+          if (!(mov.year >= min && mov.year <= max))  arr.splice(i,1);
+        });
+        break;
+        case 'runtime':
+        filtered.forEach((mov, i, arr) => {
+          var min = filters.min ? filters.min : 2
+          var max = filters.max ? filters.max : 480
+          if (!(mov.runtime >= min && mov.runtime <= max))   arr.splice(i,1);
+        });
+        break;
+        case 'rating':
+        filtered.forEach((mov, i, arr) => {
+          var min = filters.min ? filters.min : 0
+          var max = filters.max ? filters.max : 100
+          console.log(mov.rating)
+          if (!(mov.rating >= min && mov.rating <= max))  arr.splice(i,1);
+        });
+        break;
+      }
+      results = filtered;
+    }
+
+    else if (filters.keyword) {
+      results = this.searchKey(filters, results);
+    }
+    else {
+      switch(filters.whichRange) {
+        case 'year':
+        this.newAllMovies.forEach(mov => {
+          var min = filters.min ? filters.min : 1888
+          var max = filters.max ? filters.max : 2030
+          if (mov.year > min && mov.year < max)  results.push(mov);
+        });
+        break;
+        case 'runtime':
+        this.newAllMovies.forEach(mov => {
+          var min = filters.min ? filters.min : 2
+          var max = filters.max ? filters.max : 480
+          if (mov.runtime > min && mov.runtime < max)  results.push(mov);
+        });
+        break;
+        case 'rating':
+        this.newAllMovies.forEach(mov => {
+          var min = filters.min ? filters.min : 0
+          var max = filters.max ? filters.max : 100
+          if (mov.rating > min && mov.rating < max) results.push(mov);
+        });
+        break;
+      }
+    }
+    return results;
+
+  }
+  searchKey(filters, arr) {
     switch (filters.whichKey) {
 
       case 'title':
       this.newAllMovies.forEach(mov => {
-        if (mov.title.toLowerCase().search(filters.keyword.toLowerCase()) != -1) results.push(mov);
+        if (mov.title.toLowerCase().search(filters.keyword.toLowerCase()) != -1) arr.push(mov);
       });
       break;
       case 'director':
       this.newAllMovies.forEach(mov => {
-        if (mov.director.toLowerCase().search(filters.keyword.toLowerCase()) != -1) results.push(mov);
+        if (mov.director.toLowerCase().search(filters.keyword.toLowerCase()) != -1) arr.push(mov);
       });
       break;
       case 'plot':
       this.newAllMovies.forEach(mov => {
-        if (mov.plot.toLowerCase().search(filters.keyword.toLowerCase()) != -1) results.push(mov);
+        if (mov.plot.toLowerCase().search(filters.keyword.toLowerCase()) != -1) arr.push(mov);
       }) ;
       break;
       case 'cast':
       this.newAllMovies.forEach(mov => {
         mov.mainCast.forEach(cast => {
-          if (cast.toLowerCase().search(filters.keyword.toLowerCase()) != -1) results.push(mov);
+          if (cast.toLowerCase().search(filters.keyword.toLowerCase()) != -1) arr.push(mov);
         });
       });
       break;
     }
-
-    console.log(results);
+    return arr;
   }
-
 }

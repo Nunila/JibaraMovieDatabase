@@ -49,6 +49,21 @@
     border-bottom: 2px #E24E42 dashed;
 }
 
+#addnewimage {
+    font-family:'Titan One';
+    background-color: #e9b000; 
+    color: white; 
+    border-color: transparent;
+    border-radius: 0; 
+}
+
+.preview {
+    max-width: 230px;
+    max-height: 230px;
+    border: 10px solid rgba(255, 255, 255, 0.836);
+    margin: 5px;
+}
+
 /*----------------------------------------*/
 h2 {
     font-family: 'Titan One';
@@ -69,32 +84,13 @@ h2 {
     border: #e9b000;
 }
 
-input {
+input, select, textarea, .no-round {
     border-radius: 0%;
     border-color: transparent;
 }
 
-select {
-    border-radius: 0%;
-    border-color: transparent;
+.top-b {
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 
-textarea {
-    border-radius: 0%;    
-    border-color: transparent;
-}
-
-#addnewimage {
-    font-family:'Titan One';
-    background-color: #e9b000; 
-    color: white; 
-    border-color: transparent;
-    border-radius: 0; 
-}
-
-.preview {
-    max-width: 230px;
-    max-height: 230px;
-    border: 10px solid rgba(255, 255, 255, 0.836);
-    margin: 5px;
-}
