@@ -2,7 +2,7 @@
 .home-container {
 	margin-top: -50px;
 	width: 100%;  
-    min-height: 100vh;
+	min-height: 100vh;
 	color: white;
 	display: flex;
 	flex-direction: column;
@@ -28,6 +28,7 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
+	z-index: 1;
 	/* background-color: #e9ecef; */
 	text-align: center;
 

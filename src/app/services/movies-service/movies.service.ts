@@ -96,6 +96,7 @@ export class MoviesService {
             })
           })
           this.newAllMovies.push(newMov);
+          this.fillOtherMovieArr();   
         }
       });
 

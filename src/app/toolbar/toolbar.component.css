@@ -16,7 +16,9 @@
     }
 }
 
-
+nav {
+    z-index: 10;
+}
 .navbar {
     background-color: #008f95;
     /* #DF744A */
