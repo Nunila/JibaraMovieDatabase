@@ -34,8 +34,11 @@ export class SearchMoviesComponent implements OnInit {
 
   checkKey(e){
     if (e.key == "Enter")  {
-      this.results = this.moviesService.search(this.searchForm);
-  
+      this.search(); 
     }
+  }
+
+  search(){
+    this.results = this.moviesService.search(this.searchForm);
   }
 }

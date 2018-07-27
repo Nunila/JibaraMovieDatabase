@@ -131,6 +131,10 @@ export class ModifyDBComponent implements OnInit {
   }
 
   postNewMovie(){
+    this.newMovie.genres = this.manageStringToArray(this.newMovie.genres);
+    this.newMovie.mainCast = this.manageStringToArray(this.newMovie.mainCast);
+    this.newMovie.writer = this.manageStringToArray(this.newMovie.writer);
+
     if (this.moviesService.gotDataLocally)  this.moviesService.httpPostMovie(this.newMovie);
     else this.moviesService.firebasePOST(this.newMovie);
   }

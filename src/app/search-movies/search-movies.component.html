@@ -14,7 +14,7 @@
           <input type="text" [(ngModel)]="searchForm.keyword" (keyup)="checkKey($event)" name="title" class="form-control" id="inputTitle" placeholder="Keyword to search">
         </div>
         <div class="form-group col-md-2">
-          <select [(ngModel)]="searchForm.whichKey" required name="year" class="custom-select">
+          <select [(ngModel)]="searchForm.whichKey" (change)="search()" required name="year" class="custom-select">
             <option value="title">Title</option>
             <option value="plot">Plot</option>
             <option value="director">Director</option>
@@ -51,41 +51,6 @@
         </figcaption>			
       </figure>
     </div>
-      <!-- <div class="container">
-          <table class="table table-sm table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">Year</th>
-                  <th scope="col">Genre</th>
-                  <th scope="col">Original Language</th>
-                  <th scope="col">Director</th>
-                  <th scope="col">Main Cast</th>
-                  <th scope="col">Rating (RT)</th>
-                  <th scope="col">Nuni Aprooval</th>
-                  <th scope="col">Fun Fact</th>
-                  <th scope="col">Seen</th>
-                </tr>
-              </thead>
-              <tbody >
-                <tr *ngFor= "let movie of getAllMovies(); let i=index">
-                  <th scope="row">{{i + 1}}</th>
-                  <th scope="row">{{movie.title}}</th>
-                  <td>{{movie.year}}</td>
-                  <td>{{movie.genres}}</td>
-                  <td>{{movie.originalLanguage}}</td>
-                  <td>{{movie.director}}</td>
-                  <td>{{movie.mainCast}}</td>
-                  <td>{{movie.rating}}</td>
-                  <td>{{movie.nuniAprooval}}</td>
-                  <td>{{movie.funFact}}</td>
-                  <td>{{movie.seen}}</td>
-                </tr>
-          
-              </tbody>
-            </table>
-      </div> -->
   </div>
 </div>
 

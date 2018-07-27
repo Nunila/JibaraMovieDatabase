@@ -99,7 +99,6 @@ export class MoviesService {
           this.fillOtherMovieArr();   
         }
       });
-
   }
 
   firebasePut(movie:movieSchema) {
@@ -322,18 +321,29 @@ export class MoviesService {
 
 //---------------SEARCH-------------------------------//
 
+  recRemove(arr, min, max, prop){
+    arr.forEach((mov,i,a) => {
+      if (!(mov[prop] >= min && mov[prop] <= max))  {
+        a.splice(i,1);
+        this.recRemove(a, min, max, prop)
+      }
+    })
+
+    return arr;
+  }
   search(filters){
     var results: Array<movieSchema> = new Array();
 
     if (filters.keyword && filters.min || filters.keyword && filters.max || filters.keyword && filters.max && filters.min){
-      var  filtered: Array<movieSchema> = this.searchKey(filters, results);
+      var  filtered: Array<movieSchema> = JSON.parse(JSON.stringify(this.searchKey(filters, results)));
 
       switch(filters.whichRange) {
         case 'year':
         filtered.forEach((mov, i, arr) => {
           var min = filters.min ? filters.min : 1888
           var max = filters.max ? filters.max : 2030
-          if (!(mov.year >= min && mov.year <= max))  arr.splice(i,1);
+          var a = this.recRemove(filtered, min, max, 'year');
+          console.log(a);
         });
         break;
         case 'runtime':
@@ -347,7 +357,6 @@ export class MoviesService {
         filtered.forEach((mov, i, arr) => {
           var min = filters.min ? filters.min : 0
           var max = filters.max ? filters.max : 100
-          console.log(mov.rating)
           if (!(mov.rating >= min && mov.rating <= max))  arr.splice(i,1);
         });
         break;
@@ -406,6 +415,7 @@ export class MoviesService {
       break;
       case 'cast':
       this.newAllMovies.forEach(mov => {
+
         mov.mainCast.forEach(cast => {
           if (cast.toLowerCase().search(filters.keyword.toLowerCase()) != -1) arr.push(mov);
         });
